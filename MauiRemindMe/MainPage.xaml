@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiRemindMe.MainPage">
+
+
+    <VerticalStackLayout>
+        <!--Padding="30,0"
+            Spacing="25"-->
+
+        <!--<Border HeightRequest="100">
+            <Label>
+            </Label>
+
+        </Border>-->
+        <HorizontalStackLayout
+
+
+            VerticalOptions="Center" 
+ HorizontalOptions="Center">
+
+            <!--<Button Clicked="Button_Clicked" Text="Day" />
+            <Button Clicked= "Button_Clicked" Text="Week" />
+            <Button Clicked= "Button_Clicked" Text="Admin" />
+            <Button Clicked="Button_Clicked" Text="AddNotificationPage Btn" />-->
+
+
+        </HorizontalStackLayout>
+
+        <ScrollView>
+           
+
+
+
+
+
+          
+            <!--
+            <Button Clicked="Button_Clicked" Text="MyProfile Btn" />
+            <Button Clicked="Button_Clicked" Text="OpenPage Btn" />
+            <Button Clicked="Button_Clicked" Text="RegisterPage Btn" />
+            <Button Clicked="Button_Clicked" Text="SearchDate Btn" />-->
+       
+         </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>

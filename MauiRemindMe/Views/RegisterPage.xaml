@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiRemindMe.Views.RegisterPage"
+             xmlns:vm= "clr-namespace:MauiRemindMe.ViewsModels"
+             x:DataType="vm:RegisterPageVM"
+             Title="RegisterPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Name:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry Text="{Binding Name}" Placeholder="Enter full name"/>
+
+        <Label 
+     Text="Email:"
+     VerticalOptions="Center" 
+     HorizontalOptions="Center" />
+        <Entry Text="{Binding Email}" Keyboard="Email" Placeholder="Enter email address" />
+
+        <Label 
+    Text="Password:"
+    VerticalOptions="Center" 
+    HorizontalOptions="Center" />
+        <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Enter a password" />
+        <Button  Text="Add" Command="{Binding RegisterCommand}" />
+
+    </VerticalStackLayout>
+</ContentPage>

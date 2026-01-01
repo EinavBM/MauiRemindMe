@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiRemindMe.Views.NotificationListPage"
+             xmlns:models="clr-namespace:MauiRemindMe.Models"
+             xmlns:vm="clr-namespace:MauiRemindMe.ViewsModels"
+             x:DataType="vm:NotificationListVM"
+             Title="NotificationListPage">
+    
+    <VerticalStackLayout>
+        <CollectionView ItemsSource="{Binding Notifilist}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:NotificationM">
+                    <SwipeView>
+                        <!--  SwipeView.TopItems,SwipeView.RightItems,SwipeView.BottomItems  -->
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <!--  Binding .   : means pass the whole object as parameter  -->
+                                <!--
+              DeleteCommand belongs to the view model but in the collectioview
+              we are running under DataType=Toy so we need
+              to reference Source to find the BindingContext with the viewmodel
+              x:RelativeSource enables us to auto search the viewmodel in the visual tree
+          -->
+                                <SwipeItem Command="{Binding DeleteNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}, Mode=FindAncestorBindingContext}}"
+                     CommandParameter="{Binding Id}"
+                     Text="Delet"
+                     BackgroundColor="Red">
+                                    <!--  הוספת כפתורי ניווט  -->
+                                </SwipeItem>
+                                
+                                <SwipeItem Command="{Binding ShowNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}, Mode=FindAncestorBindingContext}} "
+                     CommandParameter="{Binding .}"
+                     Text="Edit"
+                     BackgroundColor="Green">
+                                    <!--  הוספת כפתורי ניווט  -->
+                                </SwipeItem>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        
+                    <StackLayout>
+                        <!--<Label Text="{Binding DateN}"-->
+                        <!--<Label Text="{Binding TimeN}"   בינתיים לא להסים עד שלא מוסיפים אותם בפיירביס -->
+                        <Label Text="{Binding Status}"/>
+                        <Label Text="{Binding Info}"/>
+                    </StackLayout>
+                  </SwipeView>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button
+          Text="Show List"
+          SemanticProperties.Hint="show list"
+          Command="{Binding LoadDataCommand}"
+          HorizontalOptions="Fill"/>
+
+    </VerticalStackLayout>
+</ContentPage>

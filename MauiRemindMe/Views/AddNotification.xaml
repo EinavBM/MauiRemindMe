@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiRemindMe.Views.AddNotification"
+            xmlns:vm="clr-namespace:MauiRemindMe.ViewsModels"
+             x:DataType="vm:AddNotificationVM"
+             Title="AddNotification ">
+    <ScrollView>
+        <VerticalStackLayout>
+        <Label 
+            Text="Add Notification"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+            <Entry Text="{Binding Name}" Placeholder="notification name"/>
+
+            <Picker x:Name="Notification"
+                Title="Select typ of notification">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}" >
+                    <x:String>task</x:String>
+                    <x:String>event</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Label 
+         Text="Enter a date"
+         VerticalOptions="Center" 
+         HorizontalOptions="Center" />
+            <Entry Text="{Binding Description}"  Placeholder="Description"/>
+            <DatePicker Date="{Binding DateN}"
+          HorizontalOptions="Center" />
+        <TimePicker 
+           HorizontalOptions="Center"/>
+
+            <Label 
+    Text="Event content"
+    VerticalOptions="Center" 
+    HorizontalOptions="Center" />
+            <Button  Text="Add" Command="{Binding SaveNoteCommand}" />
+        </VerticalStackLayout>
+        </ScrollView>   
+</ContentPage>

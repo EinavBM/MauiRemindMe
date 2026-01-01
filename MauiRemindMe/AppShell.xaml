@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MauiRemindMe.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiRemindMe"
+    xmlns:views="clr-namespace:MauiRemindMe.Views"
+    Shell.FlyoutBehavior="Flyout"
+    Title="MauiRemindMe">
+
+    <!--<ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />-->
+
+    <FlyoutItem Title="main menu">
+        
+        <Tab Title="Add Notification">
+            <ShellContent
+ Title="Add Notification"
+ ContentTemplate="{DataTemplate views:AddNotification}"
+ Route="AddNotification" />
+        </Tab>
+        <Tab Title="Notification List">
+            <ShellContent
+Title="Notification List"
+ContentTemplate="{DataTemplate views:NotificationListPage}"
+Route="NotificationList" />
+        </Tab>
+
+        <Tab Title="Register List">
+            <ShellContent
+Title="Register List"
+ContentTemplate="{DataTemplate views:RegisterListPage}"
+Route="RegisterList" />
+        </Tab>
+
+        <Tab Title="Login">
+            <ShellContent
+Title="Login"
+ContentTemplate="{DataTemplate views:LoginPage}"
+Route="Login" />
+        </Tab>
+   
+
+
+        <Tab Title="Register">
+            <ShellContent
+Title="Register"
+ContentTemplate="{DataTemplate views:RegisterPage}"
+Route="Register" />
+        </Tab>
+    </FlyoutItem>
+</Shell>

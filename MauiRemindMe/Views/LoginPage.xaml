@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MauiRemindMe.ViewsModels"
+             x:DataType="viewmodel:LoginPageViewModel"
+             x:Class="MauiRemindMe.Views.LoginPage"
+             Title="LoginPage">
+    <VerticalStackLayout>
+        <Label 
+     
+     VerticalOptions="Center" 
+     HorizontalOptions="Center" />
+        <Entry Keyboard="Email" Text="{Binding Email}" Placeholder="Enter your email address"/>
+
+
+        <Label 
+
+VerticalOptions="Center" 
+HorizontalOptions="Center" />
+        <Entry IsPassword="True" Text="{Binding Password}" Placeholder="Enter your password" />
+        <Button Text="Login" Command="{Binding LoginCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

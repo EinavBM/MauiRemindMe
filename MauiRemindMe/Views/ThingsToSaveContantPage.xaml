@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiRemindMe.Views.ThingsToSaveContantPage"
+             xmlns:models="clr-namespace:MauiRemindMe.Models"
+             x:DataType="models:ThingsToSave"
+             Title="ThingsToSaveContantPage">
+    <VerticalStackLayout>
+        <Grid
+      
+      ColumnDefinitions="auto,auto,auto,auto"
+      HorizontalOptions="Center"
+      RowDefinitions="auto,auto">
+
+            <Label
+          Grid.Row="1"
+          FontSize="Large"
+          Text="id"
+          TextColor="Red"
+          VerticalOptions="Center" />
+
+            <Label
+          Grid.Row="1"
+          Grid.Column="1"
+          Grid.ColumnSpan="3"
+          FontSize="Medium"
+          Text="{Binding Id}"
+          VerticalOptions="Center" />
+
+
+            <Label
+          Margin="5"
+          FontSize="Medium"
+           Text="date"
+          TextColor="Red"
+          VerticalOptions="Center" />
+            
+            <Label
+          Grid.Column="1"
+          FontSize="Medium"
+           Text="{Binding Tdate}"
+          VerticalOptions="Center" />
+            
+            <Label
+          Grid.Column="2"
+          Margin="5"
+          FontSize="Medium"
+          Text="time"
+          TextColor="Red"
+          VerticalOptions="Center" />
+            
+            <Label
+          Grid.Column="3"
+          FontSize="Medium"
+           Text="{Binding Thour}"
+          VerticalOptions="Center" />
+
+            <Label
+          Grid.Row="1"
+          FontSize="Large"
+          Text="masseg status"
+          TextColor="Red"
+          VerticalOptions="Center" />
+
+            <Label
+         Grid.Row="1"
+         Grid.Column="1"
+         Grid.ColumnSpan="3"
+         FontSize="Medium" 
+         Text="{Binding StatusMs}"
+         VerticalOptions="Center" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
