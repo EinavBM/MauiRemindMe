@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:viewmodel="clr-namespace:MauiRemindMe.ViewsModels"
+ x:DataType="viewmodel:LogOutVM"
              x:Class="MauiRemindMe.LogOutPage"
              Title="LogOutPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Spacing="30" Padding="30" VerticalOptions="Center">
+
+        <!-- כרטיס הודעה -->
+        <Border BackgroundColor="White" 
+               Padding="30">
+
+            <VerticalStackLayout Spacing="20">
+
+                <!-- אייקון או סמל של התנתקות -->
+                <Label Text="👋" FontSize="50" HorizontalOptions="Center" />
+
+                <!-- כותרת -->
+                <Label Text="Logging Out?"
+                       FontSize="26"
+                       TextColor="#006400" 
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+
+                <!-- הודעת אישור -->
+                <Label Text="Are you sure you want to sign out of Remind Me?"
+                       FontSize="16"
+                       TextColor="Gray"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap" />
+
+                <!-- כפתור התנתקות (ירוק כהה) -->
+                <Button Text="YES, LOG OUT"
+                        Command="{Binding LogoutCommand}"
+                        BackgroundColor="#006400"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        HeightRequest="55"
+                        CornerRadius="25"
+                        Margin="0,10,0,0" />
+
+              
+
+            </VerticalStackLayout>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>

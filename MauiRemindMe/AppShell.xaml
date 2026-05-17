@@ -8,47 +8,53 @@
     Shell.FlyoutBehavior="Flyout"
     Title="MauiRemindMe">
 
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />-->
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="loginpage" />
 
-    <FlyoutItem Title="main menu">
+    <ShellContent
+     Title="Register"
+     ContentTemplate="{DataTemplate views:RegisterPage}"
+     Route="registerpage" />
+    
+    <TabBar Route="main"  Title="main menu">
         
-        <Tab Title="Add Notification">
+       
             <ShellContent
  Title="Add Notification"
  ContentTemplate="{DataTemplate views:AddNotification}"
- Route="AddNotification" />
-        </Tab>
-        <Tab Title="Notification List">
+ Route="addnotification" />
+     
+        
+       
             <ShellContent
 Title="Notification List"
 ContentTemplate="{DataTemplate views:NotificationListPage}"
-Route="NotificationList" />
-        </Tab>
-
-        <Tab Title="Register List">
+Route="notificationlist" />
+       
+      
             <ShellContent
 Title="Register List"
 ContentTemplate="{DataTemplate views:RegisterListPage}"
-Route="RegisterList" />
-        </Tab>
+Route="registerlist" />
+    
+    
+        <ShellContent
+Title="MyProfile"
+ContentTemplate="{DataTemplate views:MyProfile}"
+        Route="myprofile"/>
 
-        <Tab Title="Login">
-            <ShellContent
-Title="Login"
-ContentTemplate="{DataTemplate views:LoginPage}"
-Route="Login" />
-        </Tab>
-   
+        
+    <ShellContent
+Title="SearchDate"
+ContentTemplate="{DataTemplate views:SearchDate}"
+Route="searchdate"/>
 
+        <!--<ShellContent
+Title="LogOut"
+ContentTemplate="{DataTemplate views:LogOutPage}"
+Route="logout"/>-->
 
-        <Tab Title="Register">
-            <ShellContent
-Title="Register"
-ContentTemplate="{DataTemplate views:RegisterPage}"
-Route="Register" />
-        </Tab>
-    </FlyoutItem>
+    </TabBar>
 </Shell>

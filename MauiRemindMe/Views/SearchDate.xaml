@@ -3,18 +3,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiRemindMe.Views.SearchDate"
              Title="SearchDate">
-    <VerticalStackLayout>
-        <Label 
-            Text="Search date"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Spacing="20" Padding="20">
 
-        <Label 
-          Text="Enter the date the you are looking for"
-          VerticalOptions="Center" 
-          HorizontalOptions="Center" />
-        <DatePicker 
-         HorizontalOptions="Center"/>
-        
+        <!-- כותרת -->
+        <Label Text="חיפוש מטלות" 
+           FontSize="24" 
+           TextColor="#006400" 
+           FontAttributes="Bold" 
+           HorizontalOptions="Center" />
+
+        <!-- כרטיס הטופס -->
+        <Border 
+          
+           
+           BackgroundColor="White" 
+           Padding="20">
+
+            <VerticalStackLayout Spacing="15">
+
+                <!-- שדה שם מטלה -->
+                <Label Text="שם המטלה:" TextColor="#006400" FontAttributes="Bold" />
+                <Entry x:Name="TaskNameEntry" 
+                   Placeholder="הקלידו את שם המטלה..." 
+                   PlaceholderColor="Gray"
+                   TextColor="Black"
+                   BackgroundColor="#F0F8FF" />
+                <!-- תכלת בהיר מאוד לרקע השדה -->
+
+                <!-- שדה תאריך -->
+                <Label Text="תאריך יעד:" TextColor="#006400" FontAttributes="Bold" />
+                <DatePicker x:Name="TaskDatePicker" 
+                        TextColor="Black"
+                        BackgroundColor="#F0F8FF"
+                        MinimumDate="2020-01-01" />
+
+                <!-- כפתור חיפוש -->
+                <!--Clicked="OnSearchClicked"-->
+                <Button Text="חפש מטלה" 
+                   
+                    BackgroundColor="#006400" 
+                    TextColor="White"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    FontAttributes="Bold"
+                    Margin="0,10,0,0" />
+
+            </VerticalStackLayout>
+        </Border>
+
     </VerticalStackLayout>
+
 </ContentPage>

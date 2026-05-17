@@ -5,19 +5,59 @@
              x:DataType="viewmodel:LoginPageViewModel"
              x:Class="MauiRemindMe.Views.LoginPage"
              Title="LoginPage">
-    <VerticalStackLayout>
-        <Label 
-     
-     VerticalOptions="Center" 
-     HorizontalOptions="Center" />
-        <Entry Keyboard="Email" Text="{Binding Email}" Placeholder="Enter your email address"/>
+   
+    <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+
+        <!-- כותרת שם הדף -->
+        <Label Text="Login"
+           FontSize="32"
+           TextColor="#006400" 
+           FontAttributes="Bold"
+           HorizontalOptions="Center" />
+
+        <!-- שדה אימייל -->
+        <Border BackgroundColor="#F0F8FF" Padding="5,0">
+            <Entry x:Name="EmailEntry"
+               Placeholder="Email Address"
+               Keyboard="Email" Text="{Binding Email}" 
+               TextColor="Black"
+               PlaceholderColor="Gray"
+               HeightRequest="50" />
+        </Border>
+
+        <!-- שדה סיסמה -->
+        <Border BackgroundColor="#F0F8FF" Padding="5,0">
+            <Entry x:Name="PasswordEntry"
+               Placeholder="Password"
+               IsPassword="True" Text="{Binding Password}"
+               TextColor="Black"
+               PlaceholderColor="Gray"
+               HeightRequest="50" />
+        </Border>
+
+        <!-- כפתור התחברות -->
+        <Button Text="LOG IN"
+          
+                Command="{Binding LoginCommand}"
+            BackgroundColor="#006400"
+            TextColor="White"
+            FontAttributes="Bold"
+            HeightRequest="55"
+            CornerRadius="25"
+            Margin="0,10,0,0" />
+
+        <Button Text="Sign Up"
+   
+         Command="{Binding RegisterCommand}"
+     BackgroundColor="#006400"
+     TextColor="White"
+     FontAttributes="Bold"
+     HeightRequest="45"
+     CornerRadius="25"
+     Margin="0,10,0,0" />
 
 
-        <Label 
-
-VerticalOptions="Center" 
-HorizontalOptions="Center" />
-        <Entry IsPassword="True" Text="{Binding Password}" Placeholder="Enter your password" />
-        <Button Text="Login" Command="{Binding LoginCommand}"/>
     </VerticalStackLayout>
+
+
 </ContentPage>

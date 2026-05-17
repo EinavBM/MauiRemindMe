@@ -7,40 +7,42 @@
              x:DataType="vm:NotificationListVM"
              Title="NotificationListPage">
     
-    <VerticalStackLayout>
+    
+        <!--<ScrollView >
+        <VerticalStackLayout>
         <CollectionView ItemsSource="{Binding Notifilist}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:NotificationM">
                     <SwipeView>
-                        <!--  SwipeView.TopItems,SwipeView.RightItems,SwipeView.BottomItems  -->
+                        --><!--  SwipeView.TopItems,SwipeView.RightItems,SwipeView.BottomItems  --><!--
                         <SwipeView.LeftItems>
                             <SwipeItems>
-                                <!--  Binding .   : means pass the whole object as parameter  -->
+                                --><!--  Binding .   : means pass the whole object as parameter  -->
                                 <!--
               DeleteCommand belongs to the view model but in the collectioview
               we are running under DataType=Toy so we need
               to reference Source to find the BindingContext with the viewmodel
               x:RelativeSource enables us to auto search the viewmodel in the visual tree
-          -->
+          --><!--
                                 <SwipeItem Command="{Binding DeleteNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}, Mode=FindAncestorBindingContext}}"
                      CommandParameter="{Binding Id}"
                      Text="Delet"
                      BackgroundColor="Red">
-                                    <!--  הוספת כפתורי ניווט  -->
+                                    --><!--  הוספת כפתורי ניווט  --><!--
                                 </SwipeItem>
                                 
                                 <SwipeItem Command="{Binding ShowNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}, Mode=FindAncestorBindingContext}} "
                      CommandParameter="{Binding .}"
                      Text="Edit"
                      BackgroundColor="Green">
-                                    <!--  הוספת כפתורי ניווט  -->
+                                    --><!--  הוספת כפתורי ניווט  --><!--
                                 </SwipeItem>
                             </SwipeItems>
                         </SwipeView.LeftItems>
                         
                     <StackLayout>
-                        <!--<Label Text="{Binding DateN}"-->
-                        <!--<Label Text="{Binding TimeN}"   בינתיים לא להסים עד שלא מוסיפים אותם בפיירביס -->
+                        --><!--<Label Text="{Binding DateN}"-->
+                        <!--<Label Text="{Binding TimeN}"   בינתיים לא להסים עד שלא מוסיפים אותם בפיירביס --><!--
                         <Label Text="{Binding Status}"/>
                         <Label Text="{Binding Info}"/>
                     </StackLayout>
@@ -50,11 +52,117 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+
         <Button
           Text="Show List"
           SemanticProperties.Hint="show list"
           Command="{Binding LoadDataCommand}"
           HorizontalOptions="Fill"/>
+        </VerticalStackLayout>
+    </ScrollView>-->
 
-    </VerticalStackLayout>
+
+
+  <ScrollView >
+   <VerticalStackLayout>
+   
+      <!--<DataTemplate x:DataType="models:NotificationM">-->
+                      
+            <!-- כותרת העמוד -->
+            <Label Text="My Notifications" 
+               FontSize="24" 
+               TextColor="#006400" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" 
+               Margin="0,0,0,10"/>
+
+            <!-- כותרות הטבלה (Header) -->
+            <Grid ColumnDefinitions="*, 2*" Padding="15,0">
+                <Label Grid.Column="0" Text="Type" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
+                <Label Grid.Column="1" Text="Description" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
+            </Grid>
+            <CollectionView ItemsSource="{Binding Notifilist}">
+                <CollectionView.ItemTemplate>
+                    <!-- רשימת ההתראות -->
+        
+                    <DataTemplate x:DataType="models:NotificationM">
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Reveal">
+                                    <!-- כפתור מחיקה -->
+                                    <SwipeItem Command="{Binding DeleteNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}}}"
+                                           CommandParameter="{Binding Id}"
+                                           Text="Delete"
+                                           BackgroundColor="#FF4C4C" />
+
+                                    <!-- כפתור עריכה -->
+                                    <SwipeItem Command="{Binding ShowNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}}}"
+                                           CommandParameter="{Binding .}"
+                                           Text="Edit"
+                                           BackgroundColor="#006400" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+
+                            <!-- עיצוב פריט בתוך Border -->
+                            <Border Stroke="#ADD8E6"
+                                BackgroundColor="White"
+                                Padding="15"
+                                Margin="0,5">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+
+                                <Grid ColumnDefinitions="* , *, *, *" ColumnSpacing="15">
+                                    <!-- סוג ההתראה (Status) -->
+                                    <Label Grid.Column="0" 
+                                       Text="{Binding Status}" 
+                                       TextColor="#006400" 
+                                       FontAttributes="Bold"
+                                       VerticalOptions="Center" />
+
+                                    <!-- תוכן ההתראה (Info) -->
+                                    <Label Grid.Column="1" 
+                                       Text="{Binding Info}" 
+                                       TextColor="Black" 
+                                       FontSize="13"
+                                       LineBreakMode="TailTruncation"
+                                       VerticalOptions="Center" />
+                                   
+                                    <Label Grid.Column="2" 
+                                       Text="{Binding DateN}" 
+                                       TextColor="DimGray" 
+                                       FontSize="11"
+                                       VerticalOptions="Center" />
+
+                                    <!-- שעה -->
+                                    <Label Grid.Column="3" 
+                                       Text="{Binding TimeN}" 
+                                       TextColor="DimGray" 
+                                       FontSize="11"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </SwipeView>
+                    </DataTemplate>
+              
+
+     
+     </CollectionView.ItemTemplate>
+    </CollectionView>
+
+            <!-- כפתור טעינה בתחתית -->
+            <Button Text="SHOW LIST"
+                Command="{Binding LoadDataCommand}"
+                BackgroundColor="#006400"
+                TextColor="White"
+                CornerRadius="25"
+                HeightRequest="55"
+                FontAttributes="Bold"
+                Margin="0,20,0,10" />
+
+       
+   </VerticalStackLayout>
+  </ScrollView>
+
 </ContentPage>

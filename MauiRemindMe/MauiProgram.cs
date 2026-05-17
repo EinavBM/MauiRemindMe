@@ -53,6 +53,17 @@ namespace MauiRemindMe
             builder.Services.AddSingleton<RegisterListVM>();
             builder.Services.AddSingleton<AddAndEditNotification>();
             builder.Services.AddSingleton<AddAndEditNotificationVM>();
+            builder.Services.AddSingleton<LogOutPage>();
+            builder.Services.AddSingleton<LogOutVM>();
+            builder.Services.AddSingleton<MyProfile>();
+            //  builder.Services.AddSingleton<MyProfileVM>();
+            builder.Services.AddSingleton<SearchDate>();
+           // builder.Services.AddSingleton<SearchDateVM>();
+
+
+
+
+
             return builder.Build();
         }
     }

@@ -1,9 +1,12 @@
+using MauiRemindMe.ViewsModels;
+
 namespace MauiRemindMe;
 
 public partial class LogOutPage : ContentPage
 {
-	public LogOutPage()
+	public LogOutPage(LogOutVM vm)
 	{
 		InitializeComponent();
+		BindingContext= vm;
 	}
 }

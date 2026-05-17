@@ -5,7 +5,7 @@
              xmlns:vm= "clr-namespace:MauiRemindMe.ViewsModels"
              x:DataType="vm:RegisterPageVM"
              Title="RegisterPage">
-    <VerticalStackLayout>
+    <!--<VerticalStackLayout>
         <Label 
             Text="Name:"
             VerticalOptions="Center" 
@@ -25,5 +25,65 @@
         <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Enter a password" />
         <Button  Text="Add" Command="{Binding RegisterCommand}" />
 
-    </VerticalStackLayout>
+    </VerticalStackLayout>-->
+
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+
+            <!-- כותרת שם הדף -->
+            <Label Text="Create Account"
+                   FontSize="32"
+                   TextColor="#006400" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,10" />
+
+            <!-- שדה שם מלא -->
+            <Label Text="Full Name" TextColor="#006400" FontAttributes="Bold" Margin="5,0"/>
+            <Border BackgroundColor="#F0F8FF" Padding="5,0">
+                <Entry x:Name="NameEntry"
+                       Text="{Binding Name}"
+                       Placeholder="Your Name"
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       HeightRequest="50" />
+            </Border>
+
+            <!-- שדה אימייל -->
+            <Label Text="Email" TextColor="#006400" FontAttributes="Bold" Margin="5,0"/>
+            <Border BackgroundColor="#F0F8FF" Padding="5,0">
+                <Entry x:Name="EmailEntry"
+                       Placeholder="example@mail.com"
+                       Keyboard="Email"
+                       Text="{Binding Email}"
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       HeightRequest="50" />
+            </Border>
+
+            <!-- שדה סיסמה -->
+            <Label Text="Password" TextColor="#006400" FontAttributes="Bold" Margin="5,0"/>
+            <Border BackgroundColor="#F0F8FF" Padding="5,0">
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Minimum 6 characters"
+                       Text="{Binding Password}"
+                       IsPassword="True"
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       HeightRequest="50" />
+            </Border>
+
+            <!-- כפתור רישום -->
+            <Button Text="REGISTER NOW"
+                    Command="{Binding RegisterCommand}"
+                    BackgroundColor="#006400"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HeightRequest="55"
+                    CornerRadius="25"
+                    Margin="0,20,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -13,8 +13,10 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MauiRemindMe.ViewsModels
 {
+    [QueryProperty(nameof(MyUser), "User")]
     public partial class RegisterPageVM: CommunityToolkit.Mvvm.ComponentModel.ObservableObject
     {
+        public static bool IsLoggedIn { get; set; }
         private readonly FirebaseClient _client;
         private readonly FirebaseAuthClient _auth;
 
@@ -27,6 +29,10 @@ namespace MauiRemindMe.ViewsModels
         [ObservableProperty]
         private string? _password;
 
+        [ObservableProperty]
+        MyUser user = new();
+
+
         public RegisterPageVM(FirebaseClient client, FirebaseAuthClient auth)
         {
             _client = client;
@@ -36,6 +42,7 @@ namespace MauiRemindMe.ViewsModels
         [RelayCommand]
         private async Task Register()
         {
+            IsLoggedIn = false;
             await _auth.CreateUserWithEmailAndPasswordAsync (_email, _password);
             await _client.Child("AppUser").PostAsync(new MyUser //פעולת שמירה בדאטבייס
             {
@@ -45,8 +52,15 @@ namespace MauiRemindMe.ViewsModels
                 Email = _email,
                 Admin= false,
             }); 
-
+            IsLoggedIn = true;
+            if (IsLoggedIn)
+            {
+                await Shell.Current.GoToAsync("//main/addnotification");
+            }
 
         }
+
+
+      
     }
 }

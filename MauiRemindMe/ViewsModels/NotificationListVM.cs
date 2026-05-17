@@ -53,10 +53,15 @@ namespace MauiRemindMe.ViewsModels
 
         [RelayCommand]
         public async Task ShowNotification(NotificationM notification) 
+
         {
             _editVM.Notification = notification;
             _editVM.IsEdit = true;
-            await Shell.Current.GoToAsync(nameof(AddAndEditNotification));
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data.Add("Notification", notification);
+            //נשלח את המידע עם הפניה למסך
+        //   await Shell.Current.GoToAsync("/Details", data);
+            await Shell.Current.GoToAsync("/update", data);
         }
     }
 }

@@ -5,7 +5,7 @@
              x:Class="MauiRemindMe.Views.AddAndEditNotification"
              x:DataType="vm:AddAndEditNotificationVM"
              Title="AddAndEditNotification">
-    <VerticalStackLayout Padding="10" Margin="20,20,20,0">
+    <!--<VerticalStackLayout Padding="10" Margin="20,20,20,0">
 
         <Label  Text="{Binding FailError}"  />
         <Border Padding="10,2,10,2" >
@@ -18,6 +18,95 @@
             <Entry Placeholder="DateN" VerticalOptions="Center" Text="{Binding Notification.DateN}"/>
         </Border>
         <Button Text="Save" Command="{Binding SaveAndUpdateCommand} "/>
-        <!--<Button Text="Cancle" Command="{Binding SaveAndUpdateCommand}"/>-->
-    </VerticalStackLayout>
+        --><!--<Button Text="Cancle" Command="{Binding SaveAndUpdateCommand}"/>--><!--
+    </VerticalStackLayout>-->
+
+
+    <ScrollView BackgroundColor="#F0F8FF">
+        <VerticalStackLayout Spacing="20" Padding="25" VerticalOptions="Center">
+
+            <!-- כותרת העמוד -->
+            <Label Text="Edit Notification"
+               FontSize="26"
+               TextColor="#006400" 
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+            <!-- הודעת שגיאה (אם יש) -->
+            <Label Text="{Binding FailError}" 
+               TextColor="Red" 
+               HorizontalOptions="Center"
+               IsVisible="{Binding FailError, Converter={StaticResource StringNotEmptyConverter}}" />
+
+            <!-- כרטיס העריכה -->
+            <Border Stroke="#ADD8E6"
+                BackgroundColor="White"
+                Padding="20"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="15">
+
+                    <!-- עריכת סטטוס/סוג -->
+                    <Label Text="Status" TextColor="#006400" FontAttributes="Bold" />
+                    <Border Stroke="#ADD8E6" BackgroundColor="#F9FFFF" Padding="10,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Entry Text="{Binding Notification.Status}" 
+                           Placeholder="e.g. Task, Event" 
+                           TextColor="Black" />
+                    </Border>
+
+                    <!-- עריכת תוכן/מידע -->
+                    <Label Text="Description" TextColor="#006400" FontAttributes="Bold" />
+                    <Border Stroke="#ADD8E6" BackgroundColor="#F9FFFF" Padding="10,0">
+                       
+                        <Entry Text="{Binding Notification.Info}" 
+                           Placeholder="What needs to be done?" 
+                           TextColor="Black" />
+                    </Border>
+
+                    <!-- עריכת תאריך ושעה (זה לצד זה) -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Date" TextColor="#006400" FontAttributes="Bold" />
+                            <!-- שימוש ב-DatePicker עבור DateN -->
+                            <DatePicker Date="{Binding Notification.DateN}" 
+                                    TextColor="Black" 
+                                    BackgroundColor="#F9FFFF" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Time" TextColor="#006400" FontAttributes="Bold" />
+                            <!-- שימוש ב-TimePicker עבור TimeN -->
+                            <TimePicker Time="{Binding Notification.TimeN}" 
+                                    TextColor="Black" 
+                                    BackgroundColor="#F9FFFF" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- כפתורי פעולה -->
+                    <VerticalStackLayout Spacing="10" Margin="0,15,0,0">
+                        <Button Text="SAVE CHANGES" 
+                            Command="{Binding SaveAndUpdateCommand}"
+                            BackgroundColor="#006400"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="25"
+                            HeightRequest="55" />
+
+                        <Button Text="Cancel" 
+                            Command="{Binding GoBackCommand}" 
+                            BackgroundColor="Transparent"
+                            TextColor="#006400" />
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

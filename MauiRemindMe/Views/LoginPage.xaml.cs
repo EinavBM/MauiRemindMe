@@ -6,9 +6,12 @@ namespace MauiRemindMe.Views;
 public partial class LoginPage : ContentPage
 {
 	
-	public LoginPage(LoginPageViewModel vm)
-	{
+
+    public LoginPage(LoginPageViewModel vm)
+
+    {
 		InitializeComponent();
 		BindingContext = vm;
+
 	}
 }

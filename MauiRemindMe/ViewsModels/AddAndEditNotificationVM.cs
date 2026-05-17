@@ -14,7 +14,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace MauiRemindMe.ViewsModels
 {
-    [QueryProperty(nameof(NotificationM), "Notification")]
+    [QueryProperty(nameof(NotificationM), "notification")]
     public partial class AddAndEditNotificationVM:CommunityToolkit.Mvvm.ComponentModel.ObservableObject
     {
         private readonly FirebaseClient _client;
