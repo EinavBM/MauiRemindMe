@@ -16,28 +16,44 @@ namespace MauiRemindMe.ViewsModels
     {
         private readonly FirebaseClient _client;
         private readonly AddAndEditNotificationVM _editVM;
+        Task task;
+
+        [ObservableProperty]
+        ObservableCollection<NotificationM> notifilist = new();
         public NotificationListVM(FirebaseClient client, AddAndEditNotificationVM editVM)
         {
             _client = client;
             _editVM = editVM;
-          //  LoadData();
+          task=  LoadData();
+            notifilist.Add(new NotificationM { Info = "test/text", Id = "auwtdfitafwdt", Status = "Task" });
         }
 
-        [ObservableProperty]
-        ObservableCollection<NotificationM> notifilist = new();
 
+        [ObservableProperty]
+        public static NotificationM notification = new();
 
         [RelayCommand]
         public async Task LoadData()
         {
-            var result = _client.Child("Notification").AsObservable<NotificationM>().Subscribe((item) =>
+            try
             {
-                if (item.Object != null)
+                var result = MauiProgram.client.Child("No").AsObservable<NotificationM>().Subscribe((item) =>
                 {
-                    item.Object.Id = item.Key;//firebase key
-                    notifilist.Add(item.Object);
-                }
-            });
+                    if (item.Object != null)
+                    {
+                        item.Object.Id = item.Key;//firebase key
+                        notifilist.Add(item.Object);
+                        notification = item.Object;
+                      //  OnPropertyChanged(nameof(notifilist));
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("שגיאה", $"התחברות נכשלה", "ok");
+
+            }
+           
         }
 
         [RelayCommand]

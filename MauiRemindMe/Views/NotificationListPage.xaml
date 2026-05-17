@@ -8,65 +8,12 @@
              Title="NotificationListPage">
     
     
-        <!--<ScrollView >
-        <VerticalStackLayout>
-        <CollectionView ItemsSource="{Binding Notifilist}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:NotificationM">
-                    <SwipeView>
-                        --><!--  SwipeView.TopItems,SwipeView.RightItems,SwipeView.BottomItems  --><!--
-                        <SwipeView.LeftItems>
-                            <SwipeItems>
-                                --><!--  Binding .   : means pass the whole object as parameter  -->
-                                <!--
-              DeleteCommand belongs to the view model but in the collectioview
-              we are running under DataType=Toy so we need
-              to reference Source to find the BindingContext with the viewmodel
-              x:RelativeSource enables us to auto search the viewmodel in the visual tree
-          --><!--
-                                <SwipeItem Command="{Binding DeleteNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}, Mode=FindAncestorBindingContext}}"
-                     CommandParameter="{Binding Id}"
-                     Text="Delet"
-                     BackgroundColor="Red">
-                                    --><!--  הוספת כפתורי ניווט  --><!--
-                                </SwipeItem>
-                                
-                                <SwipeItem Command="{Binding ShowNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}, Mode=FindAncestorBindingContext}} "
-                     CommandParameter="{Binding .}"
-                     Text="Edit"
-                     BackgroundColor="Green">
-                                    --><!--  הוספת כפתורי ניווט  --><!--
-                                </SwipeItem>
-                            </SwipeItems>
-                        </SwipeView.LeftItems>
-                        
-                    <StackLayout>
-                        --><!--<Label Text="{Binding DateN}"-->
-                        <!--<Label Text="{Binding TimeN}"   בינתיים לא להסים עד שלא מוסיפים אותם בפיירביס --><!--
-                        <Label Text="{Binding Status}"/>
-                        <Label Text="{Binding Info}"/>
-                    </StackLayout>
-                  </SwipeView>
+     
 
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-
-        <Button
-          Text="Show List"
-          SemanticProperties.Hint="show list"
-          Command="{Binding LoadDataCommand}"
-          HorizontalOptions="Fill"/>
-        </VerticalStackLayout>
-    </ScrollView>-->
-
-
-
-  <ScrollView >
+  <!--<ScrollView >-->
    <VerticalStackLayout>
    
-      <!--<DataTemplate x:DataType="models:NotificationM">-->
+     
                       
             <!-- כותרת העמוד -->
             <Label Text="My Notifications" 
@@ -81,7 +28,7 @@
                 <Label Grid.Column="0" Text="Type" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
                 <Label Grid.Column="1" Text="Description" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
             </Grid>
-            <CollectionView ItemsSource="{Binding Notifilist}">
+        <CollectionView ItemsSource="{Binding Notifilist}">
                 <CollectionView.ItemTemplate>
                     <!-- רשימת ההתראות -->
         
@@ -128,19 +75,19 @@
                                        LineBreakMode="TailTruncation"
                                        VerticalOptions="Center" />
                                    
-                                    <Label Grid.Column="2" 
+                                    <!--<Label Grid.Column="2" 
                                        Text="{Binding DateN}" 
                                        TextColor="DimGray" 
                                        FontSize="11"
-                                       VerticalOptions="Center" />
+                                       VerticalOptions="Center" />-->
 
-                                    <!-- שעה -->
+                                    <!-- שעה --><!--
                                     <Label Grid.Column="3" 
                                        Text="{Binding TimeN}" 
                                        TextColor="DimGray" 
                                        FontSize="11"
                                        HorizontalOptions="End"
-                                       VerticalOptions="Center" />
+                                       VerticalOptions="Center" />-->
                                 </Grid>
                             </Border>
                         </SwipeView>
@@ -163,6 +110,6 @@
 
        
    </VerticalStackLayout>
-  </ScrollView>
+  <!--</ScrollView>-->
 
 </ContentPage>

@@ -13,12 +13,14 @@ namespace MauiRemindMe.ViewsModels
     {
         private readonly FirebaseClient _client;
         private readonly RegisterPageVM _editVM;
+        Task loaddata;
 
         public RegisterListVM(FirebaseClient client, RegisterPageVM editVM)
         {
             _client = client;
           //  LoadData();
             _editVM = editVM;
+           loaddata= LoadData();
         }
 
         [ObservableProperty]

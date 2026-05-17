@@ -11,6 +11,7 @@ namespace MauiRemindMe
 {
     public static class MauiProgram
     {
+        public static FirebaseClient client;
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -35,10 +36,10 @@ namespace MauiRemindMe
                    },
                 UserRepository = new FileUserRepository("appuser")//persist data into %AppData%\appuser
             }));
-          
 
 
-   builder.Services.AddSingleton(new FirebaseClient("https://remindme-c2389-default-rtdb.europe-west1.firebasedatabase.app/"));
+            client = new FirebaseClient("https://remindme-c2389-default-rtdb.europe-west1.firebasedatabase.app/");
+            builder.Services.AddSingleton(client);
 
         //    builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<LoginPage>();
