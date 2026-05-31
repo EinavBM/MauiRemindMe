@@ -14,8 +14,7 @@ namespace MauiRemindMe.ViewsModels
         //[ObservableProperty]
         //private string? _name;
 
-        private DateOnly _selectedDate=DateOnly.FromDateTime(DateTime.Now) ;
-        public TimeSpan TimeNe { get; set; }
+        private DateOnly _selectedDate { get; set; }
 
         public DateOnly SelectedDate
         {
@@ -30,6 +29,25 @@ namespace MauiRemindMe.ViewsModels
                 }
             }
         }
+
+        //[ObservableProperty]
+        private TimeSpan timeNe { get; set; }
+
+        public TimeSpan TimeNe 
+        {
+            get => timeNe;
+            set
+            {
+                if (timeNe != value)
+                {
+                    timeNe = value;
+                    OnPropertyChanged(); // Notifies UI of changes
+                                         // Act on the new date here
+                }
+            }
+        }
+
+        
 
         [ObservableProperty]
         private string? _description;
@@ -50,24 +68,27 @@ namespace MauiRemindMe.ViewsModels
                 }
             }
         }
+        
         public AddNotificationVM(FirebaseClient client)
         {
-            _client = client;
-            
+            _client = client; 
+            SelectedDate = DateOnly.FromDateTime(DateTime.Today);
         }
        
 
         [RelayCommand]
         private async Task SaveNote()
         {
-            DateTime dt= DateTime.Now;
+            DateTime dt = DateTime.Now;
             string st1 = AddNotification.st;
+            string id = Preferences.Default.Get("UserId", "");
             await _client.Child("Notification").PostAsync(new NotificationM //פעולת שמירה בדאטבייס
             {
+                UserId = id,
                 Status = StatusV,
                 Info = _description,
-                DateN = SelectedDate,
-               TimeN = TimeNe,
+                DateN = SelectedDate.ToString("yyyy,MM,dd"),
+               TimeN = TimeNe.ToString(@"hh\:mm\:ss"),
 
             });
 

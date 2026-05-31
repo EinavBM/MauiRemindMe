@@ -24,7 +24,7 @@ namespace MauiRemindMe.ViewsModels
         {
             _client = client;
             _editVM = editVM;
-          task=  LoadData();
+         
             notifilist.Add(new NotificationM { Info = "test/text", Id = "auwtdfitafwdt", Status = "Task" });
         }
 
@@ -37,7 +37,7 @@ namespace MauiRemindMe.ViewsModels
         {
             try
             {
-                var result = MauiProgram.client.Child("No").AsObservable<NotificationM>().Subscribe((item) =>
+                var result = MauiProgram.client.Child("Notification").AsObservable<NotificationM>().Subscribe((item) =>
                 {
                     if (item.Object != null)
                     {

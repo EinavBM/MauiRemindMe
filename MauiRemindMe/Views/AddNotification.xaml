@@ -108,13 +108,13 @@ HorizontalOptions="Center" />
                     <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
                         <DatePicker Grid.Column="0"
                                 x:Name="myDatePicker" 
-                                Date="{Binding SelectedDate}"
+                                Date="{Binding SelectedDate, Mode=TwoWay}" Format="dd/MM/yyyy"
                                 TextColor="Black"
                                 BackgroundColor="#F9FFFF" />
 
                         <TimePicker Grid.Column="1"
                                     x:Name="myTimePicker" 
-                                   Time="{Binding TimeNe}" 
+                                   Time="{Binding TimeNe, Mode=TwoWay}" Format="HH:mm" 
                                 TextColor="Black"
                                 BackgroundColor="#F9FFFF" />
                     </Grid>

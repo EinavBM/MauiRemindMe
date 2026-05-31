@@ -32,6 +32,10 @@ namespace MauiRemindMe.ViewsModels
         [RelayCommand]
         public async Task LoadData()
         {
+            if (userlist != null)// במקום שהוא יכפיל את הרשימה הוא מוחק וטוען אטתה מחדש
+            {
+                userlist.Clear();
+            }
             var result = _client.Child("AppUser").AsObservable<MyUser>().Subscribe((item) =>
             {
                 if (item.Object != null)

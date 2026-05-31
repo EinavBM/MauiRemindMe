@@ -2,13 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiRemindMe.Views.NotificationListPage"
-             xmlns:models="clr-namespace:MauiRemindMe.Models"
-             xmlns:vm="clr-namespace:MauiRemindMe.ViewsModels"
-             x:DataType="vm:NotificationListVM"
+           
+           
              Title="NotificationListPage">
     
-    
-     
+         
 
   <!--<ScrollView >-->
    <VerticalStackLayout>
@@ -24,31 +22,35 @@
                Margin="0,0,0,10"/>
 
             <!-- כותרות הטבלה (Header) -->
-            <Grid ColumnDefinitions="*, 2*" Padding="15,0">
+            <Grid ColumnDefinitions="*, *, *, *" Padding="15,0">
                 <Label Grid.Column="0" Text="Type" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
                 <Label Grid.Column="1" Text="Description" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
-            </Grid>
-        <CollectionView ItemsSource="{Binding Notifilist}">
+                <Label Grid.Column="2" Text="Date" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
+                <Label Grid.Column="3" Text="Time" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
+        </Grid>
+
+        <!--<CollectionView x:Name="notificationsCollectionView" ItemsSource="{Binding Notifilist}">-->
+            <CollectionView x:Name="notificationsCollectionView" >
                 <CollectionView.ItemTemplate>
                     <!-- רשימת ההתראות -->
         
-                    <DataTemplate x:DataType="models:NotificationM">
-                        <SwipeView>
+                    <DataTemplate>
+                        <!--<SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Reveal">
-                                    <!-- כפתור מחיקה -->
+                                    --><!-- כפתור מחיקה --><!--
                                     <SwipeItem Command="{Binding DeleteNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}}}"
                                            CommandParameter="{Binding Id}"
                                            Text="Delete"
                                            BackgroundColor="#FF4C4C" />
 
-                                    <!-- כפתור עריכה -->
+                                    --><!-- כפתור עריכה --><!--
                                     <SwipeItem Command="{Binding ShowNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}}}"
                                            CommandParameter="{Binding .}"
                                            Text="Edit"
                                            BackgroundColor="#006400" />
                                 </SwipeItems>
-                            </SwipeView.LeftItems>
+                            </SwipeView.LeftItems>-->
 
                             <!-- עיצוב פריט בתוך Border -->
                             <Border Stroke="#ADD8E6"
@@ -75,22 +77,21 @@
                                        LineBreakMode="TailTruncation"
                                        VerticalOptions="Center" />
                                    
-                                    <!--<Label Grid.Column="2" 
+                                    <Label Grid.Column="2" 
                                        Text="{Binding DateN}" 
                                        TextColor="DimGray" 
                                        FontSize="11"
-                                       VerticalOptions="Center" />-->
+                                       VerticalOptions="Center" />
 
-                                    <!-- שעה --><!--
+                                    
                                     <Label Grid.Column="3" 
                                        Text="{Binding TimeN}" 
                                        TextColor="DimGray" 
                                        FontSize="11"
-                                       HorizontalOptions="End"
-                                       VerticalOptions="Center" />-->
+                                       VerticalOptions="Center" />
                                 </Grid>
                             </Border>
-                        </SwipeView>
+                        <!--</SwipeView>-->
                     </DataTemplate>
               
 
@@ -99,8 +100,10 @@
     </CollectionView>
 
             <!-- כפתור טעינה בתחתית -->
+        <!--Command="{Binding LoadDataCommand}"-->
             <Button Text="SHOW LIST"
-                Command="{Binding LoadDataCommand}"
+              
+                    Clicked="OnSearchButtonClicked"
                 BackgroundColor="#006400"
                 TextColor="White"
                 CornerRadius="25"

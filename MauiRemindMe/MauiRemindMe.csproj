@@ -68,9 +68,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="LogOutPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="MonthMainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -85,6 +82,9 @@
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LogoutPage2.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MyProfile.xaml">
 	    <Generator>MSBuild:Compile</Generator>

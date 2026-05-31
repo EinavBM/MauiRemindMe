@@ -43,9 +43,12 @@ namespace MauiRemindMe.ViewsModels
             {
                 // ניסיון התחברות
                 await _client.SignInWithEmailAndPasswordAsync(Email, Password);
+                string id = _client.User.Uid;
 
                 // הצגת הודעת הצלחה
                 await Shell.Current.DisplayAlert("Login", $"Login succeed! yeepeee!", "ok");
+                Preferences.Default.Set("UserId", id);// שמירת ה ID של מי שעשה כניסה
+
 
                 // כאן בדרך כלל תגיע ניווט לדף הבית
                 await Shell.Current.GoToAsync("//main/addnotification");

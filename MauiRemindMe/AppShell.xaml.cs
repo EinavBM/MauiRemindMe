@@ -11,7 +11,7 @@ namespace MauiRemindMe
             Routing.RegisterRoute("/mainpage", typeof(MainPage));
             Routing.RegisterRoute("/registerpage", typeof(RegisterPage));
             Routing.RegisterRoute("/loginpage", typeof(LoginPage));
-            Routing.RegisterRoute("/logout", typeof(LogOutPage));
+            Routing.RegisterRoute("/logout", typeof(LogoutPage2));
             Routing.RegisterRoute("/update", typeof(AddAndEditNotification));
           //  Routing.RegisterRoute("/loginpage", typeof(LoginPage));
 

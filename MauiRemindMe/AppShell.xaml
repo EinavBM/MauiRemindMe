@@ -17,7 +17,12 @@
      Title="Register"
      ContentTemplate="{DataTemplate views:RegisterPage}"
      Route="registerpage" />
-    
+
+    <ShellContent
+ Title="Logout"
+ ContentTemplate="{DataTemplate views:LogoutPage2}"
+ Route="logout" />
+
     <TabBar Route="main"  Title="main menu">
         
        

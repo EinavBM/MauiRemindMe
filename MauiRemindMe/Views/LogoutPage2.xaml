@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:viewmodel="clr-namespace:MauiRemindMe.ViewsModels"
  x:DataType="viewmodel:LogOutVM"
-             x:Class="MauiRemindMe.LogOutPage"
-             Title="LogOutPage">
+             x:Class="MauiRemindMe.LogoutPage2"
+             Title="LogoutPage">
     <VerticalStackLayout Spacing="30" Padding="30" VerticalOptions="Center">
 
         <!-- כרטיס הודעה -->
@@ -40,7 +40,7 @@
                         CornerRadius="25"
                         Margin="0,10,0,0" />
 
-              
+
 
             </VerticalStackLayout>
         </Border>
