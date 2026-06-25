@@ -1,12 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
+using MauiRemindMe.Helpers;
+using Microsoft.Maui.Storage;
 
 namespace MauiRemindMe.ViewsModels
 {
     public partial class LoginPageViewModel: ObservableObject
     {
-        public static bool IsLoggedIn { get; set; }
+        public static bool IsLoggedIn { get; set; }// משתנה הודב אם חשבון מחובר
 
         private readonly FirebaseAuthClient _client; //חיבור לפיירבס
 
@@ -16,42 +18,43 @@ namespace MauiRemindMe.ViewsModels
         [ObservableProperty]
         private string? _password;
 
-        public LoginPageViewModel(FirebaseAuthClient client)
+        public LoginPageViewModel(FirebaseAuthClient client) // מגדיר לקוח שמתחבר לפיירביס 
         {
             _client= client;
         }
 
-      
-        //private async Task Login1()
-        //{
-        //    IsLoggedIn = false;
-        //    //Console.WriteLine(  Email.ToString());
-        //    //Console.WriteLine(  Password.ToString());
-        //    await _client.SignInWithEmailAndPasswordAsync(Email, Password);
-        //    _= Shell.Current.DisplayAlert("Login", $"Login succeed! yeepeee!", "ok");
-        //    IsLoggedIn = true;
-        //    if (IsLoggedIn)
-        //    {
-        //        await Shell.Current.GoToAsync("//main/addnotification");
-        //    }
-        //}
-
-        [RelayCommand]
+        [RelayCommand]// מה קורה אחרי שלחץ על כפתור
         public async Task Login()
         {
+            if (CheckingData.CheckingInput(_email, 10) == false)
+            {
+                await Shell.Current.DisplayAlert("Error", $"invalid email", "ok");
+                return;
+            }
+                
+            if (CheckingData.CheckingInput(_password, 6, 10) == false)
+            {
+                await Shell.Current.DisplayAlert("Error", $"invalid password", "ok");
+                return;
+            }
             try
             {
+
                 // ניסיון התחברות
-                await _client.SignInWithEmailAndPasswordAsync(Email, Password);
+                var auth= await _client.SignInWithEmailAndPasswordAsync(Email, Password);
+                await SecureStorage.Default.SetAsync("Token", _client.User.Uid);
                 string id = _client.User.Uid;
 
+
+
                 // הצגת הודעת הצלחה
+                //
                 await Shell.Current.DisplayAlert("Login", $"Login succeed! yeepeee!", "ok");
                 Preferences.Default.Set("UserId", id);// שמירת ה ID של מי שעשה כניסה
 
 
-                // כאן בדרך כלל תגיע ניווט לדף הבית
-                await Shell.Current.GoToAsync("//main/addnotification");
+                // כאן בדרך כלל תגיע ניווט לכל התפריט
+                await Shell.Current.GoToAsync("//main/scheduler");
             }
             catch (Exception ex)
             {
@@ -61,7 +64,7 @@ namespace MauiRemindMe.ViewsModels
         }
         
         [RelayCommand]
-        private async Task Register()
+        private async Task Register()// אם לא מחובר
         {
             IsLoggedIn = false;
             await Shell.Current.GoToAsync("//registerpage");

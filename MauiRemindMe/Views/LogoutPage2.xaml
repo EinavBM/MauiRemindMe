@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:viewmodel="clr-namespace:MauiRemindMe.ViewsModels"
  x:DataType="viewmodel:LogOutVM"
-             x:Class="MauiRemindMe.LogoutPage2"
+x:Class="MauiRemindMe.Views.LogoutPage2"
              Title="LogoutPage">
     <VerticalStackLayout Spacing="30" Padding="30" VerticalOptions="Center">
 

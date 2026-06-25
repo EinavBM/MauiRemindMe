@@ -11,64 +11,56 @@ namespace MauiRemindMe.ViewsModels
 
     public partial class RegisterListVM : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
     {
-        private readonly FirebaseClient _client;
-        private readonly RegisterPageVM _editVM;
-        Task loaddata;
+        private readonly FirebaseClient _client;//פרמטר חיבור ישיר לפיירביס
+        private readonly RegisterPageVM _editVM;//פרמטר של רשימה לא ברור!!!!!
+        Task loaddata;// לא ברור!!!!!
 
-        public RegisterListVM(FirebaseClient client, RegisterPageVM editVM)
+        public RegisterListVM(FirebaseClient client, RegisterPageVM editVM)// שורמ פרמטרים אוטומטית
         {
             _client = client;
-          //  LoadData();
             _editVM = editVM;
            loaddata= LoadData();
         }
 
-        [ObservableProperty]
-        ObservableCollection<MyUser> userlist = new();
+        [ObservableProperty]// שומר אוטומטית את ערך השורה אחרי
+        ObservableCollection<MyUser> userlist = new();//יוצר רשימה של משתמשים
 
-        [ObservableProperty]
-        public static MyUser user = new();
+        [ObservableProperty]// שומר אוטומטית את ערך השורה אחרי
+        public static MyUser user = new();//יוצר פרמטר חדש של משתמש
 
-        [RelayCommand]
-        public async Task LoadData()
+        [RelayCommand]//יוצר כפתור של הפעולה הבאה
+        public async Task LoadData()//מה יקרה בטעינת העמוד
         {
-            if (userlist != null)// במקום שהוא יכפיל את הרשימה הוא מוחק וטוען אטתה מחדש
+            try
             {
-                userlist.Clear();
-            }
-            var result = _client.Child("AppUser").AsObservable<MyUser>().Subscribe((item) =>
-            {
-                if (item.Object != null)
+                if (userlist != null)// במקום שהוא יכפיל את הרשימה הוא מוחק וטוען אטתה מחדשת לא עובד
                 {
-                    item.Object.Id = item.Key;//firebase key
-                    userlist.Add(item.Object);
-                    user= item.Object;
+                    userlist.Clear();
                 }
-            });
+                var result = _client.Child("AppUser").AsObservable<MyUser>().Subscribe((item) =>//מביא את כל המשתמשים ששמורים בפיירביס ומציג כל אחד בנפרד עם הפרטים שלו
+                {
+                    if (item.Object != null)
+                    {
+                        item.Object.Id = item.Key;//firebase key
+                        userlist.Add(item.Object);
+                        user = item.Object;
+                    }
+                });
+            }
+            catch (Exception)//במקרה והייתה תקלה
+            {
+                await Shell.Current.DisplayAlert("Error", $"loading faild", "ok");
+            }
         }
 
-        [RelayCommand]
+        [RelayCommand]//יוצר כפתור של הפעולה הבאה
         public async Task DeleteAppUser(string Id)//מוחק משתמש
         {
-            //var result = await Shell.Current.DisplayAlert("Confirm", "are you sure want to delete?", "Ok", "Cancel");
-            //if (result)
-            //{
             await _client.Child($"AppUser/{Id}").DeleteAsync();
-           // await LoadData();
-            //  }
         }
 
-       // [RelayCommand]
-        //public async Task ShowUser(MyUser user)
-        //{
-        //    _editVM. = notification;
-        //    _editVM.IsEdit = true;
-        //    await Shell.Current.GoToAsync(nameof(AddAndEditNotification));
-        //}
-
-        [RelayCommand]
-
-        public async Task SaveAndUpdate()
+        [RelayCommand]//יוצר כפתור של הפעולה הבאה
+        public async Task ShowUser(string Id)
         {
             //לא מושלם
             await _client.Child($"AppUser/{user.Id}").PutAsync(new MyUser //פעולת שמירה בדאטבייס

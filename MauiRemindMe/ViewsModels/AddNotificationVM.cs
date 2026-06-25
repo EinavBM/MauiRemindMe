@@ -2,21 +2,19 @@
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Database;
 using Firebase.Database.Query;
+using MauiRemindMe.Helpers;
 using MauiRemindMe.Models;
 using MauiRemindMe.Views;
 
 namespace MauiRemindMe.ViewsModels
 {
-    public partial class AddNotificationVM : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
+    public partial class AddNotificationVM : CommunityToolkit.Mvvm.ComponentModel.ObservableObject// 
     {
-        private readonly FirebaseClient _client;
+        private readonly FirebaseClient _client;// משתנה מתקשר לפיירביס
 
-        //[ObservableProperty]
-        //private string? _name;
+        private DateTime _selectedDate { get; set; } //אובייקט תאריך
 
-        private DateOnly _selectedDate { get; set; }
-
-        public DateOnly SelectedDate
+        public DateTime SelectedDate
         {
             get => _selectedDate;
             set
@@ -30,8 +28,7 @@ namespace MauiRemindMe.ViewsModels
             }
         }
 
-        //[ObservableProperty]
-        private TimeSpan timeNe { get; set; }
+        private TimeSpan timeNe { get; set; }// אובייקט זמן
 
         public TimeSpan TimeNe 
         {
@@ -46,8 +43,6 @@ namespace MauiRemindMe.ViewsModels
                 }
             }
         }
-
-        
 
         [ObservableProperty]
         private string? _description;
@@ -72,9 +67,9 @@ namespace MauiRemindMe.ViewsModels
         public AddNotificationVM(FirebaseClient client)
         {
             _client = client; 
-            SelectedDate = DateOnly.FromDateTime(DateTime.Today);
+            SelectedDate = DateTime.Today;
         }
-       
+
 
         [RelayCommand]
         private async Task SaveNote()
@@ -82,13 +77,29 @@ namespace MauiRemindMe.ViewsModels
             DateTime dt = DateTime.Now;
             string st1 = AddNotification.st;
             string id = Preferences.Default.Get("UserId", "");
+            if (CheckingData.CheckingDate(_selectedDate) == false)
+            {
+                await Shell.Current.DisplayAlert("Error", $"invalid date", "ok");
+                return;
+            }
+            if (CheckingData.CheckingInput(_description) == false)
+            {
+                await Shell.Current.DisplayAlert("Error", $"missing description", "ok");
+                return;
+            }
+            if (CheckingData.CheckingInput(StatusV) == false)
+            {
+                await Shell.Current.DisplayAlert("Error", $"missing status", "ok");
+                return;
+            }
             await _client.Child("Notification").PostAsync(new NotificationM //פעולת שמירה בדאטבייס
             {
                 UserId = id,
                 Status = StatusV,
                 Info = _description,
-                DateN = SelectedDate.ToString("yyyy,MM,dd"),
-               TimeN = TimeNe.ToString(@"hh\:mm\:ss"),
+                DateN = SelectedDate,
+                TimeN = TimeNe.ToString(@"hh\:mm\:ss"),
+                Id = Guid.NewGuid().ToString()
 
             });
 

@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace MauiRemindMe.Models
 {
-    public class ObservableObject : INotifyPropertyChanged
+    // מחלקה שיורשים ממנה
+    public class ObservableObject : INotifyPropertyChanged// מקום זה מגדיר אובייקט שיודע להתעדכן בעצמו בתצוגה
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

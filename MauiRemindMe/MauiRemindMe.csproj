@@ -65,6 +65,8 @@
 		<PackageReference Include="FirebaseDatabase.net" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="32.1.25" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,9 +77,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AddNotification.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\AdminUserList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
@@ -104,25 +103,15 @@
 	  <MauiXaml Update="Views\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\SchedulerPage2.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\SearchDate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ThingsToSaveContantPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="WeekMainPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Helpers\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Views\AdminUserList.xaml.cs">
-	    <DependentUpon>AdminUserList.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\AddAndEditNotification.xaml.cs">
 	    <DependentUpon>AddAndEditNotification.xaml</DependentUpon>
 	  </Compile>

@@ -2,17 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiRemindMe.Views.NotificationListPage"
-           
-           
+           xmlns:views="clr-namespace:MauiRemindMe.Views"
+           x:Name="thisPage"
              Title="NotificationListPage">
     
-         
-
-  <!--<ScrollView >-->
-   <VerticalStackLayout>
-   
-     
-                      
+  <ScrollView>
+      
+       <VerticalStackLayout>
+    
             <!-- כותרת העמוד -->
             <Label Text="My Notifications" 
                FontSize="24" 
@@ -35,22 +32,23 @@
                     <!-- רשימת ההתראות -->
         
                     <DataTemplate>
-                        <!--<SwipeView>
+                        <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Reveal">
-                                    --><!-- כפתור מחיקה --><!--
-                                    <SwipeItem Command="{Binding DeleteNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}}}"
+                                     <!--כפתור מחיקה-->
+                                    <SwipeItem  x:Name="deleteItem" Command="{Binding DeleteNotificationCommand, Source={x:RelativeSource AncestorType={x:Type views:NotificationListPage}}}"
+                                  
                                            CommandParameter="{Binding Id}"
                                            Text="Delete"
                                            BackgroundColor="#FF4C4C" />
 
-                                    --><!-- כפתור עריכה --><!--
-                                    <SwipeItem Command="{Binding ShowNotificationCommand, Source={x:RelativeSource AncestorType={x:Type vm:NotificationListVM}}}"
-                                           CommandParameter="{Binding .}"
+                                     <!--כפתור עריכה-->
+                                    <SwipeItem  x:Name="editItem" Command="{Binding ShowNotificationCommand, Source={x:RelativeSource AncestorType={x:Type views:NotificationListPage}}}"
+                                           CommandParameter="{Binding Id}"
                                            Text="Edit"
                                            BackgroundColor="#006400" />
                                 </SwipeItems>
-                            </SwipeView.LeftItems>-->
+                            </SwipeView.LeftItems>
 
                             <!-- עיצוב פריט בתוך Border -->
                             <Border Stroke="#ADD8E6"
@@ -91,7 +89,7 @@
                                        VerticalOptions="Center" />
                                 </Grid>
                             </Border>
-                        <!--</SwipeView>-->
+                        </SwipeView>
                     </DataTemplate>
               
 
@@ -113,6 +111,6 @@
 
        
    </VerticalStackLayout>
-  <!--</ScrollView>-->
+  </ScrollView>
 
 </ContentPage>

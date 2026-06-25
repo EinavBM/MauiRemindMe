@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:viewmodel="clr-namespace:MauiRemindMe.ViewsModels"
+              
              x:Class="MauiRemindMe.Views.MyProfile"
              Title="MyProfile">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+   <!--עדיין בעבודה-->
+    <!--<ScrollView BackgroundColor="#F0F8FF">
+        <VerticalStackLayout Spacing="20" Padding="25" VerticalOptions="Center">
+
+            <Label Text="My Profile" FontSize="26" TextColor="#006400" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Border Stroke="#ADD8E6" BackgroundColor="White" Padding="20">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="15">
+
+                    --><!-- שם משתמש --><!--
+                    <Label Text="Full Name" TextColor="#006400" FontAttributes="Bold" />
+                    <Border Stroke="#ADD8E6" BackgroundColor="#F9FFFF" Padding="10,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        --><!-- IsEnabled קובע אם השדה נעול או פתוח דינמית מה-VM --><!--
+                        <Entry Text="{Binding EditName}" IsEnabled="{Binding IsEditMode}" TextColor="Black" />
+                    </Border>
+
+                    --><!-- אימייל --><!--
+                    <Label Text="Email Address" TextColor="#006400" FontAttributes="Bold" />
+                    <Border Stroke="#ADD8E6" BackgroundColor="#F9FFFF" Padding="10,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Entry Text="{Binding EditEmail}" IsEnabled="{Binding IsEditMode}" Keyboard="Email" TextColor="Black" />
+                    </Border>
+
+                    --><!-- סיסמה --><!--
+                    <Label Text="Password" TextColor="#006400" FontAttributes="Bold" />
+                    <Border Stroke="#ADD8E6" BackgroundColor="#F9FFFF" Padding="10,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        --><!-- השתמשתי ב-IsPassword כפול כדי שהסיסמה תהיה מוסתרת כשהוא לא בעריכה וגלויה בעריכה, או השאירי קבוע --><!--
+                        <Entry Text="{Binding EditPassword}" IsEnabled="{Binding IsEditMode}" TextColor="Black" />
+                    </Border>
+
+                    --><!-- כפתור פעולה ראשי (משנה את הטקסט שלו אוטומטית) --><!--
+                    <Button Text="{Binding ActionButtonText}" 
+                        Command="{Binding HandleActionCommand}"
+                        BackgroundColor="#006400" TextColor="White" FontAttributes="Bold" CornerRadius="25" HeightRequest="50" Margin="0,15,0,0"/>
+
+                    --><!-- כפתור ביטול - מופיע רק בזמן עריכה --><!--
+                    <Button Text="Cancel" 
+                        Command="{Binding CancelEditCommand}"
+                        IsVisible="{Binding IsEditMode}"
+                        BackgroundColor="Transparent" TextColor="#006400" />
+
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>-->
+
 </ContentPage>

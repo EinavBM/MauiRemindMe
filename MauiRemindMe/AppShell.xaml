@@ -7,11 +7,13 @@
     xmlns:views="clr-namespace:MauiRemindMe.Views"
     Shell.FlyoutBehavior="Flyout"
     Title="MauiRemindMe">
+    <!--מראה את הכפתורים לכל הדפים בתחתית כל הדפים-->
+    <!--קובץ הניווט של כל הדפים העצמיים באפליקציה-->
 
     <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="loginpage" />
+     Title="Login"
+     ContentTemplate="{DataTemplate views:LoginPage}"
+     Route="loginpage" />
 
     <ShellContent
      Title="Register"
@@ -19,10 +21,12 @@
      Route="registerpage" />
 
     <ShellContent
- Title="Logout"
- ContentTemplate="{DataTemplate views:LogoutPage2}"
- Route="logout" />
+     Title="Logout"
+     ContentTemplate="{DataTemplate views:LogoutPage2}"
+     Route="logout" />
 
+    
+    
     <TabBar Route="main"  Title="main menu">
         
        
@@ -46,20 +50,16 @@ Route="registerlist" />
     
     
         <ShellContent
-Title="MyProfile"
-ContentTemplate="{DataTemplate views:MyProfile}"
-        Route="myprofile"/>
+Title="HomePage"
+ContentTemplate="{DataTemplate views:SchedulerPage2}"
+        Route="scheduler"/>
 
-        
-    <ShellContent
+        <ShellContent
 Title="SearchDate"
 ContentTemplate="{DataTemplate views:SearchDate}"
 Route="searchdate"/>
 
-        <!--<ShellContent
-Title="LogOut"
-ContentTemplate="{DataTemplate views:LogOutPage}"
-Route="logout"/>-->
+        
 
     </TabBar>
 </Shell>

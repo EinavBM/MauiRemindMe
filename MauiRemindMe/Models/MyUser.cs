@@ -1,11 +1,11 @@
 ﻿namespace MauiRemindMe.Models
 {
-    public class MyUser
+    public class MyUser// פרטי משתמש נשמרים
     {
-        public string? Id { get; set; }
-        public string? Name { get; set; }
-        public string? Email { get; set; }
-        public string? Password { get; set; }
-        public bool? Admin { get; set; }
+        public string? Id { get; set; } //תז המשתמש בפיירביס
+        public string? Name { get; set; } //שם
+        public string? Email { get; set; }// מייל
+        public string? Password { get; set; }//סיסמה
+        public bool? Admin { get; set; }// אם מנהל
     }
 }

@@ -2,7 +2,7 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MauiRemindMe"
-             x:Class="MauiRemindMe.App">
+             x:Class="MauiRemindMe.App"><!--מחבר את כל דפי העיצוב ומממש אותם-->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

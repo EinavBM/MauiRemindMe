@@ -6,53 +6,6 @@
              xmlns:vm="clr-namespace:MauiRemindMe.ViewsModels"
              x:DataType="vm:RegisterListVM"
              Title="RegisterListPage">
-    <!--<VerticalStackLayout>
-        <CollectionView ItemsSource="{Binding Userlist}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:MyUser">
-                    <SwipeView>
-                        --><!--  SwipeView.TopItems,SwipeView.RightItems,SwipeView.BottomItems  --><!--
-                        <SwipeView.LeftItems>
-                            <SwipeItems>
-                              
-
-                                <SwipeItem Command="{Binding DeleteAppUserCommand, Source={x:RelativeSource AncestorType={x:Type vm:RegisterListVM}, Mode=FindAncestorBindingContext}}"
-                                     CommandParameter="{Binding Id}"
-                                     Text="Delet"
-                                      BackgroundColor="Red">
-                                   
-                                </SwipeItem>
-                                
-                                <SwipeItem Command="{Binding ShowAppUserCommand, Source={x:RelativeSource AncestorType={x:Type vm:RegisterListVM}, Mode=FindAncestorBindingContext}} "
-                                      CommandParameter="{Binding Id}"
-                                      Text="Edit"
-                                      BackgroundColor="Green">
-                                </SwipeItem>
-                            </SwipeItems>
-                        </SwipeView.LeftItems>
-
-                        <StackLayout>
-                            <Label Text="{Binding Name}"/>
-                            <Label Text="{Binding Email}"/>
-                            <Label Text="{Binding Password}"/>
-                        </StackLayout>
-                    </SwipeView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <Button
-    Text="Show List"
-    SemanticProperties.Hint="show list"
-    Command="{Binding LoadDataCommand}"
-    HorizontalOptions="Fill"/>
-
-    </VerticalStackLayout>-->
-
-
-
-
-
     <ScrollView >
         <VerticalStackLayout>
 
@@ -77,7 +30,7 @@
                                        Text="Delete"
                                        BackgroundColor="#FF4C4C" />
 
-                                    <SwipeItem Command="{Binding ShowAppUserCommand, Source={x:RelativeSource AncestorType={x:Type vm:RegisterListVM}}}"
+                                    <SwipeItem Command="{Binding ShowUserCommand, Source={x:RelativeSource AncestorType={x:Type vm:RegisterListVM}}}"
                                        CommandParameter="{Binding Id}"
                                        Text="Edit"
                                        BackgroundColor="#006400" />
@@ -133,88 +86,4 @@
 
         </VerticalStackLayout>
     </ScrollView>
-
-
-    <!--<ScrollView BackgroundColor="#F0F8FF">
-
-        <VerticalStackLayout Padding="20" Spacing="10">
-
-            --><!-- כותרת --><!--
-            <Label Text="Registered Users" 
-               FontSize="24" 
-               TextColor="#006400" 
-               FontAttributes="Bold" 
-               HorizontalOptions="Center" />
-
-            --><!-- כותרות הטבלה --><!--
-            <Grid ColumnDefinitions="*, 1.5*, *" Padding="15,0" Margin="0,10,0,0">
-                <Label Grid.Column="0" Text="Name" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
-                <Label Grid.Column="1" Text="Email" FontAttributes="Bold" TextColor="Gray" FontSize="12"/>
-                <Label Grid.Column="2" Text="Password" FontAttributes="Bold" TextColor="Gray" FontSize="12" HorizontalOptions="End"/>
-            </Grid>
-
-            --><!-- רשימת המשתמשים -->
-            <!-- שימוש ב-BindableLayout בתוך VerticalStackLayout מאפשר גלילה חלקה בתוך ScrollView --><!--
-            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Userlist}">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="models:MyUser">
-                        <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItems Mode="Reveal">
-                                    <SwipeItem Command="{Binding DeleteAppUserCommand, Source={x:RelativeSource AncestorType={x:Type vm:RegisterListVM}}}"
-                                           CommandParameter="{Binding Id}"
-                                           Text="Delete"
-                                           BackgroundColor="#FF4C4C" />
-                                    <SwipeItem Command="{Binding ShowAppUserCommand, Source={x:RelativeSource AncestorType={x:Type vm:RegisterListVM}}}"
-                                           CommandParameter="{Binding Id}"
-                                           Text="Edit"
-                                           BackgroundColor="#006400" />
-                                </SwipeItems>
-                            </SwipeView.LeftItems>
-
-                            <Border Stroke="#ADD8E6"
-                                BackgroundColor="White"
-                                Padding="15"
-                                Margin="0,5">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="10"/>
-                                </Border.StrokeShape>
-
-                                <Grid ColumnDefinitions="*, 1.5*, *" ColumnSpacing="10">
-                                    <Label Grid.Column="0" 
-                                       Text="{Binding Name}" 
-                                       TextColor="#006400" 
-                                       FontAttributes="Bold" />
-
-                                    <Label Grid.Column="1" 
-                                       Text="{Binding Email}" 
-                                       TextColor="Black" 
-                                       FontSize="13" />
-
-                                    <Label Grid.Column="2" 
-                                       Text="{Binding Password}" 
-                                       TextColor="DimGray" 
-                                       FontSize="13"
-                                       HorizontalOptions="End" />
-                                </Grid>
-                            </Border>
-                        </SwipeView>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </VerticalStackLayout>
-
-            --><!-- כפתור בתחתית - יתגלגל יחד עם הרשימה --><!--
-            <Button Text="Refresh List"
-                Command="{Binding LoadDataCommand}"
-                BackgroundColor="#006400"
-                TextColor="White"
-                CornerRadius="20"
-                HeightRequest="50"
-                FontAttributes="Bold"
-                Margin="0,20,0,0"/>
-
-        </VerticalStackLayout>
-    </ScrollView>-->
-
-
 </ContentPage>

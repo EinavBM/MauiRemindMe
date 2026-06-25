@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiRemindMe.Views.SchedulerPage2"
+         xmlns:scheduler="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
+              xmlns:vm="clr-namespace:MauiRemindMe.ViewsModels"
+             xmlns:local="clr-namespace:MauiRemindMe"
+               x:DataType="vm:SchedulerVM">
+
+    <VerticalStackLayout>
+        <Grid RowDefinitions="*, Auto">
+            <scheduler:SfScheduler x:Name="Scheduler" Grid.Row="0" 
+                          View="Week" 
+                          AllowedViews="Day,Week,WorkWeek,Month,TimelineDay,TimelineMonth,TimelineWeek,TimelineWorkWeek,Agenda"
+                          TodayHighlightBrush="Red" DisplayDate="01/01/2026"
+                          FirstDayOfWeek="Sunday"
+                           AppointmentsSource="{Binding SchedulerEvent}">
+        <scheduler:SfScheduler.BindingContext>
+            <vm:SchedulerVM>
+                
+            </vm:SchedulerVM>
+        </scheduler:SfScheduler.BindingContext>
+                
+        <!--הגדרות תצוגת חודש (אופציונלי)-->
+        <scheduler:SfScheduler.MonthView>
+            <scheduler:SchedulerMonthView AppointmentDisplayMode="Indicator" />
+        </scheduler:SfScheduler.MonthView>
+    </scheduler:SfScheduler>
+
+            <Grid Grid.Row="1" ColumnDefinitions="*, *, *"  VerticalOptions="End">
+            <!-- כפתור לעמוד חיפוש תאריך -->
+            <!-- כפתור 1 -->
+            
+      <Button Grid.Column="0" 
+              Text="Search Date" 
+              Command="{Binding SearchCommand}"
+              TextColor="#006400" 
+              BackgroundColor="Transparent" />
+
+            <!-- כפתור 2 (הוספה - מודגש בירוק) -->
+            <Button Grid.Column="1" 
+              Text="+ Add New" 
+              Command="{Binding AddNotificationBnCommand}"
+              BackgroundColor="#006400" 
+              TextColor="White" 
+              CornerRadius="15" 
+              HeightRequest="45" />
+
+            <!-- כפתור 3 -->
+            <Button Grid.Column="2" 
+              Text="Tasks List" 
+              Command="{Binding NotificationListBnCommand}"
+              TextColor="#006400" 
+              BackgroundColor="Transparent" />
+            </Grid>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

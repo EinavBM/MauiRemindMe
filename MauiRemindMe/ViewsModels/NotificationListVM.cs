@@ -10,53 +10,53 @@ using Firebase.Database;
 using MauiRemindMe.Models;
 using MauiRemindMe.Views;
 
-namespace MauiRemindMe.ViewsModels
+namespace MauiRemindMe.ViewsModels// לא בשימוש
 {
     public partial class NotificationListVM:CommunityToolkit.Mvvm.ComponentModel.ObservableObject
     {
-        private readonly FirebaseClient _client;
-        private readonly AddAndEditNotificationVM _editVM;
-        Task task;
+        private readonly FirebaseClient _client; // חיבור לפיירביס
+        private readonly AddAndEditNotificationVM _editVM;//פרמטר של עריכת תזכורת
+        Task task;// משתנה מסוג משימה
 
-        [ObservableProperty]
-        ObservableCollection<NotificationM> notifilist = new();
-        public NotificationListVM(FirebaseClient client, AddAndEditNotificationVM editVM)
+        [ObservableProperty]// כל פעם שהערך של השורה שאחרי משתנה, הוא יעדכן אוטומטית את מסך האפליקציה
+        ObservableCollection<NotificationM> notifilist = new();// פרמטר רשימה של תזכורות 
+        public NotificationListVM(FirebaseClient client, AddAndEditNotificationVM editVM)// שומר את שני הפרמטרים אוטומטית 
         {
             _client = client;
             _editVM = editVM;
          
-            notifilist.Add(new NotificationM { Info = "test/text", Id = "auwtdfitafwdt", Status = "Task" });
+            notifilist.Add(new NotificationM { Info = "test/text", Id = "auwtdfitafwdt", Status = "Task" });// מידא חד פעמי
         }
 
 
-        [ObservableProperty]
-        public static NotificationM notification = new();
+ 
+        [ObservableProperty]// כל פעם שהערך של השורה שאחרי משתנה, הוא יעדכן אוטומטית את מסך האפליקציה
+        public static NotificationM notification = new();// יוצר אובייקט תזכורת 
 
-        [RelayCommand]
-        public async Task LoadData()
+        [RelayCommand]// הופך את הפונקציה הבאה לכפתור שיעבוד בXAML
+        public async Task LoadData()// מה קורה כשהמסך נטען
         {
-            try
+            try// מנסה להעריץ ואם לא מצליח שומר את מה שיש
             {
-                var result = MauiProgram.client.Child("Notification").AsObservable<NotificationM>().Subscribe((item) =>
+                var result = MauiProgram.client.Child("Notification").AsObservable<NotificationM>().Subscribe((item) =>//?????
                 {
                     if (item.Object != null)
                     {
                         item.Object.Id = item.Key;//firebase key
                         notifilist.Add(item.Object);
                         notification = item.Object;
-                      //  OnPropertyChanged(nameof(notifilist));
                     }
                 });
             }
-            catch (Exception ex)
+            catch (Exception ex)// אם לא מצליח
             {
-                await Shell.Current.DisplayAlert("שגיאה", $"התחברות נכשלה", "ok");
+                await Shell.Current.DisplayAlert("שגיאה", $"התחברות נכשלה", "ok");//הודעה 
 
             }
            
         }
 
-        [RelayCommand]
+        [RelayCommand]// הופך את הפונקציה הבאה לכפתור שיעבוד בXAML
         public async Task DeleteNotification(string Id)//מוחק התרעה
         {
             //var result = await Shell.Current.DisplayAlert("Confirm", "are you sure want to delete?", "Ok", "Cancel");
@@ -67,7 +67,7 @@ namespace MauiRemindMe.ViewsModels
             //  }
         }
 
-        [RelayCommand]
+        [RelayCommand]//הופך את הפונקציה הבאה לכפתור שיעבוד ב XAML
         public async Task ShowNotification(NotificationM notification) 
 
         {
@@ -76,7 +76,6 @@ namespace MauiRemindMe.ViewsModels
             Dictionary<string, object> data = new Dictionary<string, object>();
             data.Add("Notification", notification);
             //נשלח את המידע עם הפניה למסך
-        //   await Shell.Current.GoToAsync("/Details", data);
             await Shell.Current.GoToAsync("/update", data);
         }
     }

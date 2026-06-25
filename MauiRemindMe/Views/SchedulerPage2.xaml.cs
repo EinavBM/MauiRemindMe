@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Firebase.Auth;
 using MauiRemindMe.ViewsModels;
+
 
 namespace MauiRemindMe.Views
 {
-    public partial class LogoutPage2 : ContentPage
+  
+    public partial class SchedulerPage2 : ContentPage
     {
-        public LogoutPage2(LogOutVM vm)
+        public SchedulerPage2(SchedulerVM vm)
         {
             InitializeComponent();
-            BindingContext = vm;
+            BindingContext=vm;
         }
     }
 }

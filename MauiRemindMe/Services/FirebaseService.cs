@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using CommunityToolkit.Mvvm.Input;
+using Firebase.Auth;
+using Firebase.Auth.Providers;
 using Firebase.Database;
 using Firebase.Database.Query;
 using MauiRemindMe.Models;
@@ -6,199 +9,189 @@ using MauiRemindMe.Models;
 
 namespace MauiRemindMe.Services
 {
-    public class FirebaseService
+    public class FirebaseService// מחלקה שמבצעת פעולות מול הפיירביס
     {
 
-        private readonly FirebaseClient _firebaseClient;
+        private readonly FirebaseClient _firebaseClient;// משתנה שמעביר נתונים מהפיירבייס
 
-
-        public FirebaseService()
+        private const string FireBaseApiKey = "AIzaSyDDcMQoNMeZUGC3KTmaIbAJfG0sLqyzFlc";
+        private readonly FirebaseAuthProvider authProvider;
+        public FirebaseService() //מחלקה בונה
         {
-            // החלף את הכתובת הזו בכתובת ה-URL של ה-Firebase Realtime Database שלך
-            string firebaseDatabaseUrl = "https://remindme-c2389-default-rtdb.europe-west1.firebasedatabase.app/";
+            string firebaseDatabaseUrl = "https://remindme-c2389-default-rtdb.europe-west1.firebasedatabase.app/";// כתובת הפיירביס שאליה כל הנתונים נשלחים
 
-            _firebaseClient = new FirebaseClient(firebaseDatabaseUrl);
+            _firebaseClient = new FirebaseClient(firebaseDatabaseUrl);// מאתחלת את המשתנה
+           // authProvider= new FirebaseAuthProvider(new FirebaseConfig(FirebaseApiKey));
+        }
+       
+        public async Task<List<NotificationM>> GetNotificationAsync(string userId)//הגדרת פונ המקבלת משתמש ומחזירה את על התזכורות שלו
+        {
+		    List < NotificationM > notlist = new();// יוצר רשימה לתזכורות
+			try// מגן במקרה של שגיאה או חוסר אינטרנט
+            {
+                var notifications = await _firebaseClient.Child("Notification").OnceAsync<NotificationM>();// בעזרת המשתנה שהגדרנו אנחנו פונים לעמוד של התזכורות ולקח משם את כולם
+
+                foreach (var notification in notifications) //עובר על כל אחת מהתזכורות
+                {
+                    NotificationM not = notification.Object;// לקיחת כל תזכורת באובייקט NOT
+
+                    if (notification!= null && not.UserId== userId)// אם התזכורת לא ריקה וגם מזהה את תז המשתמש של התזכורת
+						notlist.Add(not);// מוסיף רשימה לרשימה מקורית
+				}
+                return notlist;//מחזיר רשימה
+            }
+            catch (Exception ex)// במקרה של שגיאה
+            {
+                System.Diagnostics.Debug.WriteLine($"Error retrieving data: {ex.Message}");// התראה
+                return null; //מחזיר כלום
+            }
         }
 
-        /// <summary>
-        /// שמירת עובד חדש יחד עם היסטוריית העבודה שלו ב-Firebase
-        /// </summary>
-        //public async Task<bool> SaveEmployeeAsync(Employee employee)
-        //{
-        //    try
-        //    {
-        //        // יצירת רשומה חדשה תחת ענף "Employees" וקבלת מזהה ייחודי
-        //        var result = await _firebaseClient
-        //            .Child("Employees")
-        //            .PostAsync(employee);
+        public async Task<List<NotificationM>> GetNotificationAsync()//הגדרת פונ המקבלת משתמש ומחזירה את על התזכורות שלו
+        {
+            List<NotificationM> notlist = new();// יוצר רשימה לתזכורות
+            try// מגן במקרה של שגיאה או חוסר אינטרנט
+            {
+                var notifications = await _firebaseClient.Child("Notification").OnceAsync<NotificationM>();// בעזרת המשתנה שהגדרנו אנחנו פונים לעמוד של התזכורות ולקח משם את כולם
 
-        //        // עדכון ה-Id של האובייקט המקומי במפתח שנוצר ב-Firebase (אופציונלי)
-        //        employee.Id = result.Key;
+                foreach (var notification in notifications) //עובר על כל אחת מהתזכורות
+                {
+                    NotificationM not = notification.Object;// לקיחת כל תזכורת באובייקט NOT
 
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // כאן ניתן להוסיף לוג לשגיאות
-        //        System.Diagnostics.Debug.WriteLine($"Error saving to Firebase: {ex.Message}");
-        //        return false;
-        //    }
-        //}
+                        notlist.Add(not);// מוסיף רשימה לרשימה מקורית
+                }
+                return notlist;//מחזיר רשימה
+            }
+            catch (Exception ex)// במקרה של שגיאה
+            {
+                System.Diagnostics.Debug.WriteLine($"Error retrieving data: {ex.Message}");// התראה
+                return null; //מחזיר כלום
+            }
+        }
 
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public async Task<List<NotificationM>> GetNotificationAsync(string userId)
+        public async Task<bool> DeleteNotification(string Id)//מוחק התרעה
         {
 
-		    List < NotificationM > notlist = new();
-
-			try
+            try
             {
-                // 1. שליפת כל העובדים ששמם שווה לשם המבוקש
-                // הערה: בשביל יעילות ב-Firebase, מומלץ להגדיר ".indexOn": "Name" בחוקי השרת
-                var notifications = await _firebaseClient
+                // 1. שליפת כל ההראות מהשרת
+                var list = await _firebaseClient
                     .Child("Notification")
-                    //.OrderBy("Name")
-                    //.EqualTo(employeeName)
                     .OnceAsync<NotificationM>();
 
+                // 2. לולאה למציאת ההתראה המתאים
+                foreach (var item in list)
 
-               
-                foreach (var notification in notifications)
                 {
+                    if (item.Object.Id == Id)
+                    {
+                        // 3. מחיקת הרשומה הספציפית מהשרת באמצעות הפקודה DeleteAsync
+                        await _firebaseClient
+                            .Child("Notification")
+                            .Child(item.Key) // המפתח הייחודי ב-Firebase
+                            .DeleteAsync();
 
-                    NotificationM not = notification.Object;
-                   
-                    if (notification!= null && not.UserId== userId)
+                        return true; // המחיקה הצליחה
+                    }
+                }
 
-						notlist.Add(not);
-				}
-
-                return notlist;
+                return false; // לא נמצא התזכורת
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error retrieving data: {ex.Message}");
-                return null;
+                System.Diagnostics.Debug.WriteLine($"Error deleting: {ex.Message}");
+                return false;
             }
+
+
+
+
+
+
+
+
+            //try
+            //{
+            //    var notifications = await _firebaseClient.Child("Notification").OnceAsync<NotificationM>();// מביא את הרשימה של התראות
+            //    var target = notifications.FirstOrDefault(e => e.Object.Id == Id);//מביא מהרשימה שקיבלנו את אותו ה ID שקיבלנו מהקלט
+            //    if (target == null)//אם לא מצא את הID
+            //    {
+            //        string id= target.Object.Id;
+            //        await _firebaseClient.Child("Notification").Child(id).DeleteAsync();
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    return;
+            //}
+
+
+
+
+            //await _firebaseClient.Child("Notification").Child(Id).DeleteAsync();
         }
 
-
-        //    public async Task<List<WorkHistory>> GetWorkHistoryByEmployeeNameAsync2(string employeeName)
-        //{
-        //    try
-        //    {
-        //        // 1. שליפת כל העובדים מהשרת
-        //        var allEmployees = await _firebaseClient
-        //            .Child("Employees")
-        //            .OnceAsync<Employee>();
-
-        //        // 2. מעבר על כל העובדים בלולאה כדי למצוא את העובד המתאים
-        //        foreach (var item in allEmployees)
-        //        {
-        //            // חילוץ אובייקט העובד מתוך ה-Firebase Object
-        //            Employee employee = item.Object;
-
-        //            // תנאי if: בדיקה האם השם של העובד הנוכחי שווה לשם שחיפשנו
-        //            if (employee.Name == employeeName)
-        //            {
-        //                // אם מצאנו אותו, נבדוק שיש לו היסטוריית עבודה ונחזיר אותה מיד
-        //                if (employee.WorkHistories != null)
-        //                {
-        //                    return employee.WorkHistories;
-        //                }
-        //            }
-        //        }
-
-        //        // אם הלולאה הסתיימה ולא מצאנו עובד בשם זה, נחזיר רשימה ריקה
-        //        return new List<WorkHistory>();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine($"Error retrieving data: {ex.Message}");
-        //        return null;
-        //    }
-        //}
-
-        /// <summary>
-        /// עדכון נתוני עובד והיסטוריית העבודה שלו לפי השם שלו
-        /// </summary>
-        //public async Task<bool> UpdateEmployeeByNameAsync(string employeeName, Employee updatedEmployee)
-        //{
-        //    try
-        //    {
-        //        // 1. שליפת כל העובדים מהשרת
-        //        var allEmployees = await _firebaseClient
-        //            .Child("Employees")
-        //            .OnceAsync<Employee>();
-
-        //        // 2. לולאה למציאת העובד המתאים
-        //        foreach (var item in allEmployees)
-        //        {
-        //            if (item.Object.Name == employeeName)
-        //            {
-        //                // 3. עדכון הנתונים בשרת לפי המפתח הייחודי (Key) שלו
-        //                await _firebaseClient
-        //                    .Child("Employees")
-        //                    .Child(item.Key) // המפתח הייחודי ב-Firebase
-        //                    .PutAsync(updatedEmployee); // PutAsync מחליף את הנתונים הישנים בחדשים
-
-        //                return true; // העדכון הצליח
-        //            }
-        //        }
-
-        //        return false; // העובד לא נמצא
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine($"Error updating: {ex.Message}");
-        //        return false;
-        //    }
-        //}
-
-        /// <summary>
-        /// מחיקת עובד לחלוטין מהשרת לפי השם שלו
-        /// </summary>
-        //public async Task<bool> DeleteEmployeeByNameAsync(string employeeName)
-        //{
-        //    try
-        //    {
-        //        // 1. שליפת כל העובדים מהשרת
-        //        var allEmployees = await _firebaseClient
-        //            .Child("Employees")
-        //            .OnceAsync<Employee>();
-
-        //        // 2. לולאה למציאת העובד המתאים
-        //        foreach (var item in allEmployees)
-        //        {
-        //            if (item.Object.Name == employeeName)
-        //            {
-        //                // 3. מחיקת הרשומה הספציפית מהשרת באמצעות הפקודה DeleteAsync
-        //                await _firebaseClient
-        //                    .Child("Employees")
-        //                    .Child(item.Key) // המפתח הייחודי ב-Firebase
-        //                    .DeleteAsync();
-
-        //                return true; // המחיקה הצליחה
-        //            }
-        //        }
-
-        //        return false; // העובד לא נמצא
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine($"Error deleting: {ex.Message}");
-        //        return false;
-        //    }
-        //}
+        public async Task <NotificationM> ShowNotification(string Id)
+        {
 
 
+            try
+            {
+                var list = await _firebaseClient
+                        .Child("Notification")
+                        .OnceAsync<NotificationM>();
+
+                // 2. לולאה למציאת ההתראה המתאים
+                foreach (var item in list)
+                {
+                    if (item.Object.Id == Id)
+                    {
+                        var target = item.Object;
+
+                        return target; // המחיקה הצליחה
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error deleting: {ex.Message}");
+                return null;
+            }
+
+
+
+    //try
+    //{
+    //    var notifications = await _firebaseClient.Child("Notification").OnceAsync<NotificationM>();// מביא את הרשימה של התראות
+    //    var target = notifications.FirstOrDefault(e => e.Object.Id == Id);//מביא מהרשימה שקיבלנו את אותו ה ID שקיבלנו מהקלט
+
+    //    if (target== null)//אם לא מצא את הID
+    //    {
+    //        return null;//מחזיר ריק
+    //    }
+    //    target.Object.Id = target.Key;//שומר את הID בשדה מפתח שלפיו  נוכל לעשות זיהוי חד חד ערכי
+    //    return target.Object;// מחזיר התראה
+    //}
+    //catch (Exception ex)
+    //{
+    //    return null;
+    //}
+
+
+
+
+
+    //_editVM.Notification = notification;
+    //_editVM.IsEdit = true;
+    //Dictionary<string, object> data = new Dictionary<string, object>();
+    //data.Add("Notification", notification);
+    ////נשלח את המידע עם הפניה למסך
+    //await Shell.Current.GoToAsync("/update", data);
+}
     }
-
-
 }
 
   

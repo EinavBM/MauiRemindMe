@@ -5,7 +5,7 @@
              x:DataType="viewmodel:LoginPageViewModel"
              x:Class="MauiRemindMe.Views.LoginPage"
              Title="LoginPage">
-   
+
     <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
 
         <!-- כותרת שם הדף -->
@@ -58,6 +58,4 @@
 
 
     </VerticalStackLayout>
-
-
 </ContentPage>

@@ -5,91 +5,14 @@
              NavigationPage.HasNavigationBar="False">
 
     <ScrollView>
-        
         <VerticalStackLayout>
-            
-            <!--<Button Text="Add Notification" 
-            Clicked="OnAddNotificationClicked"/>
-
-            <Button Text="Notification List" 
-            Clicked="OnNotificationListPageClicked" />-->
-
-          
-
             <Button Text="Register Page" 
             Clicked="OnRegisterPageClicked" />
-           
-            <Button Text="Login Page" 
-  Clicked="OnLoginPageClicked" />
 
-            <!--<Button Text="Register List" 
-            Clicked="OnRegisterListPageClicked" />-->
+            <Button Text="Login Page" 
+            Clicked="OnLoginPageClicked" />
 
         </VerticalStackLayout>
-        
     </ScrollView>
 </ContentPage>
-
-
-    <!--<Grid>
-        --><!-- רקע מדורג מתכלת לירוק כהה עדין --><!--
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#ADD8E6" Offset="0.1" />
-                --><!-- תכלת --><!--
-                <GradientStop Color="#004d00" Offset="1.0" />
-                --><!-- ירוק כהה מאוד --><!--
-            </LinearGradientBrush>
-        </Grid.Background>
-
-        <VerticalStackLayout Spacing="30" 
-                             Padding="30" 
-                             VerticalOptions="Center" 
-                             HorizontalOptions="Center">
-
-            --><!-- לוגו או אייקון זמני --><!--
-            <Image Source="dotnet_bot.png"
-                   HeightRequest="150"
-                   HorizontalOptions="Center"
-                   Margin="0,0,0,20"/>
-
-            --><!-- כותרת ברוכים הבאים --><!--
-            <Label Text="Welcome to Remind Me"
-                   FontSize="32"
-                   TextColor="White"
-                   FontAttributes="Bold"
-                   HorizontalTextAlignment="Center" />
-
-            <Label Text="Organize your life simply and easily"
-                   FontSize="16"
-                   TextColor="#F0F8FF"
-                   HorizontalTextAlignment="Center"
-                   Margin="0,0,0,40" />
-
-            --><!-- כפתור התחברות (ירוק כהה) --><!--
-            <Button Text="LOGIN"
-                     Clicked="OnLoginPageClicked"
-                    BackgroundColor="#006400" 
-                    TextColor="White"
-                    FontSize="18"
-                    FontAttributes="Bold"
-                    CornerRadius="25"
-                    HeightRequest="60"
-                    WidthRequest="280" />
-
-            --><!-- כפתור הרשמה (תכלת שקוף למחצה או עם מסגרת) --><!--
-            <Button Text="REGISTER"
-                    Clicked="OnRegisterPageClicked"
-                    BackgroundColor="Transparent"
-                    BorderColor="White"
-                    BorderWidth="2"
-                    TextColor="White"
-                    FontSize="18"
-                    FontAttributes="Bold"
-                    CornerRadius="25"
-                    HeightRequest="60"
-                    WidthRequest="280" />
-
-        </VerticalStackLayout>
-    </Grid>-->
 

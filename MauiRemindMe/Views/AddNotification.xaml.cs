@@ -9,12 +9,6 @@ public partial class AddNotification : ContentPage
 	{
 		InitializeComponent();
 		 st=status.Text;
-		//DateTime dt=(DateTime) myDatePicker.Date;
 		BindingContext = vm;
 	}
-
-    private void myTimePicker_TimeSelected(object sender, TimeChangedEventArgs e)
-    {
-
-    }
 }

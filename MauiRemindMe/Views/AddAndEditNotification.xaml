@@ -5,22 +5,7 @@
              x:Class="MauiRemindMe.Views.AddAndEditNotification"
              x:DataType="vm:AddAndEditNotificationVM"
              Title="AddAndEditNotification">
-    <!--<VerticalStackLayout Padding="10" Margin="20,20,20,0">
-
-        <Label  Text="{Binding FailError}"  />
-        <Border Padding="10,2,10,2" >
-            <Entry Placeholder="Status" VerticalOptions="Center" Text="{Binding Notification.Status}"/>
-        </Border>
-        <Border Padding="10,2,10,2" >
-            <Entry Placeholder="Info" VerticalOptions="Center" Text="{Binding Notification.Info}"/>
-        </Border>
-        <Border Padding="10,2,10,2" >
-            <Entry Placeholder="DateN" VerticalOptions="Center" Text="{Binding Notification.DateN}"/>
-        </Border>
-        <Button Text="Save" Command="{Binding SaveAndUpdateCommand} "/>
-        --><!--<Button Text="Cancle" Command="{Binding SaveAndUpdateCommand}"/>--><!--
-    </VerticalStackLayout>-->
-
+    
 
     <ScrollView BackgroundColor="#F0F8FF">
         <VerticalStackLayout Spacing="20" Padding="25" VerticalOptions="Center">
@@ -55,7 +40,7 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10"/>
                         </Border.StrokeShape>
-                        <Entry Text="{Binding Notification.Status}" 
+                        <Entry Text="{Binding ItemReceived.Status}" 
                            Placeholder="e.g. Task, Event" 
                            TextColor="Black" />
                     </Border>
@@ -63,8 +48,8 @@
                     <!-- עריכת תוכן/מידע -->
                     <Label Text="Description" TextColor="#006400" FontAttributes="Bold" />
                     <Border Stroke="#ADD8E6" BackgroundColor="#F9FFFF" Padding="10,0">
-                       
-                        <Entry Text="{Binding Notification.Info}" 
+
+                        <Entry Text="{Binding ItemReceived.Info}" 
                            Placeholder="What needs to be done?" 
                            TextColor="Black" />
                     </Border>
@@ -74,7 +59,7 @@
                         <VerticalStackLayout Grid.Column="0" Spacing="5">
                             <Label Text="Date" TextColor="#006400" FontAttributes="Bold" />
                             <!-- שימוש ב-DatePicker עבור DateN -->
-                            <DatePicker Date="{Binding Notification.DateN}" 
+                            <DatePicker Date="{Binding ItemReceived.DateN}" 
                                     TextColor="Black" 
                                     BackgroundColor="#F9FFFF" />
                         </VerticalStackLayout>
@@ -82,7 +67,7 @@
                         <VerticalStackLayout Grid.Column="1" Spacing="5">
                             <Label Text="Time" TextColor="#006400" FontAttributes="Bold" />
                             <!-- שימוש ב-TimePicker עבור TimeN -->
-                            <TimePicker Time="{Binding Notification.TimeN}" 
+                            <TimePicker Time="{Binding ItemReceived.Time}" 
                                     TextColor="Black" 
                                     BackgroundColor="#F9FFFF" />
                         </VerticalStackLayout>

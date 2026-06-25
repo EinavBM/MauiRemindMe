@@ -5,50 +5,7 @@
             xmlns:vm="clr-namespace:MauiRemindMe.ViewsModels"
              x:DataType="vm:AddNotificationVM"
              Title="Add Notification ">
-    <!--<ScrollView>
-        <VerticalStackLayout>
-        <Label 
-            Text="Add Notification"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-            --><!--<Entry Text="{Binding Name}" Placeholder="notification name"/>--><!--
-         
-            <Entry Text="{Binding Description}"  Placeholder="Description"/>
-
-            <Label 
-Text="Event content"
-VerticalOptions="Center" 
-HorizontalOptions="Center" />
-
-            <Picker x:Name="notification"
-                Title="Select type of notification"
-                    SelectedItem="{Binding StatusV}">
-               
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}" >
-                    <x:String>task</x:String>
-                    <x:String>event</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
-            <Label x:Name="status" Text="{Binding x:DataType='Picker', Source={x:Reference notification}, Path=SelectedItem}"  />
-          
-            <Label 
-Text="Enter a date"
-VerticalOptions="Center" 
-HorizontalOptions="Center" />
-
-            <DatePicker x:Name="myDatePicker" Date="{Binding SelectedDate, StringFormat='{0:d}'} "
-                        HorizontalOptions="Center" />
-        <TimePicker 
-           HorizontalOptions="Center"/>
-
-          
-            <Button  Text="Add" Command="{Binding SaveNoteCommand}" />
-        </VerticalStackLayout>
-        </ScrollView>-->
-
-
+    
 
     <ScrollView BackgroundColor="#F0F8FF">
         <!-- רקע תכלת בהיר מאוד לכל הדף -->

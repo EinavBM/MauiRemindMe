@@ -3,7 +3,7 @@ using MauiRemindMe.Views;
 
 namespace MauiRemindMe
 {
-    public partial class App : Application
+    public partial class App : Application// הקובץ הראשי של התכנית שמחליט מי יעבוד ראשון
     {
         public static bool IsLoggedIn { get; set; }
         public App()
@@ -11,16 +11,13 @@ namespace MauiRemindMe
             InitializeComponent();
         }
 
+
+
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            //if (IsLoggedIn)
-            //{
+           
                 return new Window(new AppShell());
-            //}
-            //else
-            //{
-                //////return new Window(new MainPage());
-            //}
+            
             //כדי להחליף שלא המיינפייג' יהיה הדף פתיחה אלה דף שאני רוצה
         }
     }

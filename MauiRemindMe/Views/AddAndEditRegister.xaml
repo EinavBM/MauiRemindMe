@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiRemindMe.Views.AddAndEditRegister"
              Title="AddAndEditRegister">
-    <VerticalStackLayout>
+    <VerticalStackLayout> <!--לבדוק מה הולך-->
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
